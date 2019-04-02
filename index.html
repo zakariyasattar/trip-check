@@ -14,6 +14,15 @@
 
 	<body>
     <center><h1>Welcome To Summer Reading List Niles West</h1></center>
+
+    <script>
+    $.ajax({
+      type: "POST",
+      url: "webscraping/pull-books.py"
+    }).done(function( o ) {
+      console.log("RAN");
+    });
+</script>
 	</body>
 
 </html>
