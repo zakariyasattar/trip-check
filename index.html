@@ -16,10 +16,13 @@
     <center><h1>Welcome To Summer Reading List Niles West</h1></center>
 
     <script>
-    var url = "http://anyorigin.com/go?url=" + encodeURIComponent("https://www.zakariyasattar.com/") + "&callback=?";
-    $.get(url, function(response) {
-      console.log(response);
+    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('http://youtube.com') + '&callback=?', function(data){
+    	pull_books(data.contents);
     });
+
+    function pull_books(html) {
+      alert(html);
+    }
 </script>
 	</body>
 
