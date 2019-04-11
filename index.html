@@ -20,11 +20,12 @@
     <script type="text/javascript" src="https://mozilla.github.io/pdf.js/build/pdf.worker.js"></script>
 
     <script>
-    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('http://youtube.com') + '&callback=?', function(data){
+    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://drive.google.com/uc?export=download&id=1D1YfLneb-dmoB6Ye8l2JvQ_uKxwIEnW-') + '&callback=?', function(data){
     	pull_books(data.contents);
     });
 
     function pull_books(html) {
+      console.log(html)
     }
 
 //     function getPageText(pageNum, PDFDocumentInstance) {
