@@ -3,75 +3,28 @@
   <head>
   	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<title>Trip Check</title>
+  	<title>Summer Reading</title>
   	<link rel="shortcut icon" href="assets/favicon.ico">
   	<link href="https://fonts.googleapis.com/css?family=Karla|Work+Sans|Muli" rel="stylesheet">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+
+    <script src="./bower_components/web/rltm.js"></script>
 	</head>
 
 	<body>
-    <center><h1>Trip Check</h1></center>
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-    <script type="text/javascript" src="https://mozilla.github.io/pdf.js/build/pdf.worker.js"></script>
 
     <script>
-    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://drive.google.com/uc?export=download&id=1D1YfLneb-dmoB6Ye8l2JvQ_uKxwIEnW-') + '&callback=?', function(data){
-    	pull_books(data.contents);
-    });
-
-    function pull_books(html) {
-      console.log(html)
-    }
-
-//     function getPageText(pageNum, PDFDocumentInstance) {
-//     // Return a Promise that is solved once the text of the page is retrieven
-//     return new Promise(function (resolve, reject) {
-//         PDFDocumentInstance.getPage(pageNum).then(function (pdfPage) {
-//             // The main trick to obtain the text of the PDF page, use the getTextContent method
-//             pdfPage.getTextContent().then(function (textContent) {
-//                 var textItems = textContent.items;
-//                 var finalString = "";
-//
-//                 // Concatenate the string of the item to the final string
-//                 for (var i = 0; i < textItems.length; i++) {
-//                     var item = textItems[i];
-//
-//                     finalString += item.str + " ";
-//                 }
-//
-//                 // Solve promise with the text retrieven from the page
-//                 resolve(finalString);
-//                 console.log(finalString);
-//             });
-//         });
-//     });
-// }
-//
-// /**
-//  * Extract the test from the PDF
-//  */
-//
-// var PDF_URL  = 'reading.pdf';
-// pdfjsLib.getDocument(PDF_URL).then(function (PDFDocumentInstance) {
-//
-//     var pageNumber = 1;
-//
-//     // Extract the text
-//     getPageText(pageNumber , PDFDocumentInstance).then(function(textPage){
-//         // Show the text of the page in the console
-//         console.log(textPage);
-//     });
-//
-// }, function (reason) {
-//     // PDF loading error
-//     console.error(reason);
-// });
-</script>
+      let user = rltm({
+      service: 'pubnub',
+      config: {
+          publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
+          subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b'
+      }
+});
+    </script>
 	</body>
 
 </html>
