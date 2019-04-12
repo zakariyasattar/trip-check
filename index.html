@@ -26,6 +26,18 @@
 
       room = user.join('room-name');
       alert(room);
+
+      room.on('join', (uuid, state) => {
+          alert('user with uuid', uuid, 'joined with state', state);
+      });
+
+      room.message({hello: "world"}).then(() => {
+          console.log('message published');
+      });
+
+      room.on('message', (uuid, data) => {
+          alert('message received from uuid', uuid, 'with data', data);
+      });
     </script>
 	</body>
 
