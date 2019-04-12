@@ -15,6 +15,10 @@
 	</head>
 
 	<body>
+    <input id="text" type="textbox"></input>
+    <button id="submitButton" onclick="submit()">Submit</button>
+
+
     <script>
       let user = rltm({
       service: 'pubnub',
@@ -24,20 +28,21 @@
             }
       });
 
-      room = user.join('room-name');
-      alert(room);
+      room = user.join('trip-check');
 
-      room.on('join', (uuid, state) => {
-          alert('user with uuid', uuid, 'joined with state', state);
-      });
-
-      room.message({hello: "world"}).then(() => {
-          console.log('message published');
-      });
+      function submit() {
+        var val = document.getElementById("text").value;
+        room.message({hello: val});
+      }
 
       room.on('message', (uuid, data) => {
-          alert('message received from uuid', uuid, 'with data', data);
+        console.log(data.hello);
       });
+
+      room.history().then((history) => {
+        console.log('got array of all messages in channel', history);
+    });
+
     </script>
 	</body>
 
