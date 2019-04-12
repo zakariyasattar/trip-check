@@ -1,5 +1,8 @@
-#dmBox {
-  float: right;
+* { margin: 0; }
 
-  width: 20vw;
+#dmBox {
+  width: 30vw;
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
