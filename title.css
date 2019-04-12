@@ -30,14 +30,14 @@ body {
 }
 
 .layer:after {
-  font: 150px/0.65 'Pacifico', 'Kaushan Script', Futura, 'Roboto', 'Trebuchet MS', Helvetica, sans-serif;
+  font: 100px/0.65 'Pacifico', 'Kaushan Script', Futura, 'Roboto', 'Trebuchet MS', Helvetica, sans-serif;
   content: 'Trip\A\A    Check!';
   white-space: pre;
   text-align: left;
   height: 100%;
   width: 100%;
   position: absolute;
-  top: 50px;
+  top: -200px;
   color: darken(#fff, 4%);
   letter-spacing: -2px;
   text-shadow: 4px 0 10px hsla(0, 0%, 0%, .13);
