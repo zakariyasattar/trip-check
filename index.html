@@ -9,12 +9,42 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+  	<link href="title.scss" rel="stylesheet" type="text/scss" />
 
     <script src="./bower_components/rltm/web/rltm.js"></script>
+
 	</head>
 
 	<body>
+<<<<<<< HEAD
+  <div class="stage">
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+</div>
+=======
+    <input id="text" type="textbox"></input>
+    <button id="submitButton" onclick="submit()">Submit</button>
+
+
+>>>>>>> 3949be713d7953660c8c49982043269ea4fc839e
     <script>
       let user = rltm({
       service: 'pubnub',
@@ -24,20 +54,21 @@
             }
       });
 
-      room = user.join('room-name');
-      alert(room);
+      room = user.join('trip-check');
 
-      room.on('join', (uuid, state) => {
-          alert('user with uuid', uuid, 'joined with state', state);
-      });
-
-      room.message({hello: "world"}).then(() => {
-          console.log('message published');
-      });
+      function submit() {
+        var val = document.getElementById("text").value;
+        room.message({hello: val});
+      }
 
       room.on('message', (uuid, data) => {
-          alert('message received from uuid', uuid, 'with data', data);
+        console.log(data.hello);
       });
+
+      room.history().then((history) => {
+        console.log('got array of all messages in channel', history);
+    });
+
     </script>
 	</body>
 
