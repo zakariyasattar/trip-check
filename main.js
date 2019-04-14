@@ -26,9 +26,7 @@ room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
     createBoxForCurrUser(data);
   }
-  else{
-    createBoxForOtherUser(data);
-  }
+  createBoxForOtherUser(data);
 });
 
 // room.history().then((history) => {
@@ -37,22 +35,52 @@ room.on('message', (uuid, data) => {
 function createBoxForCurrUser(data) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
+  var span = document.createElement('span');
 
   dm.appendChild(document.createElement('br'));
+  dm.appendChild(document.createElement('br'));
 
-  box.style.width = "27vw";
-  box.style.height = "10vh";
-
-  box.style.textAlign = "center";
   box.style.background = "white";
+  box.style.borderRadius = "10px 10px 0 10px";
 
+  box.style.float = "right"
   box.style.position = "relative";
-  box.style.top = "100px;"
+  box.style.right = "20px";
 
-  box.style.borderRadius = "10px";
+  span.innerHTML = data.message;
 
-  box.innerHTML = data.message;
+  span.style.paddingRight = "20px";
+  span.style.paddingLeft = "20px";
+  span.style.paddingTop = "20px";
+  span.style.paddingBottom = "20px";
 
+  box.appendChild(span);
+  dm.appendChild(box);
+}
+
+function createBoxForOtherUser(data) {
+  var box = document.createElement('div');
+  var dm = document.getElementById("dm");
+  var span = document.createElement('span');
+
+  dm.appendChild(document.createElement('br'));
+  dm.appendChild(document.createElement('br'));
+
+  box.style.background = "blue";
+  box.style.color = "white";
+  box.style.borderRadius = "10px 10px 10px 0px";
+  box.style.paddingRight = "10px";
+  box.style.paddingLeft = "10px";
+  box.style.float = "left"
+
+  span.innerHTML = data.message;
+
+  span.style.paddingRight = "20px";
+  span.style.paddingLeft = "20px";
+  span.style.paddingTop = "20px";
+  span.style.paddingBottom = "20px";
+
+  box.appendChild(span);
   dm.appendChild(box);
 }
 
