@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   	<link href="main.css" rel="stylesheet" type="text/css" />
-    <!-- <link href="assets/css/main.css" rel="stylesheet" type="text/css" /> -->
 
     <script src="./bower_components/rltm/web/rltm.js"></script>
 
@@ -18,39 +17,13 @@
 
 	<body>
 
-    <div id="dmBox">
-      <input id="text" type="textbox"></input>
-      <button id="submitButton" onclick="submit()">Submit</button>
-
-      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    <div id="dm">
+      <input id="dmBox" type="textbox"></input>
     </div>
 
 
-    <script>
-      let user = rltm({
-      service: 'pubnub',
-      config: {
-          publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
-          subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b'
-            }
-      });
+    <script src="main.js"></script>
 
-      room = user.join('trip-check');
-
-      function submit() {
-        var val = document.getElementById("text").value;
-        room.message({hello: val});
-      }
-
-      room.on('message', (uuid, data) => {
-        console.log(data.hello);
-      });
-
-      room.history().then((history) => {
-        console.log('got array of all messages in channel', history);
-    });
-
-    </script>
 	</body>
 
 </html>

@@ -1,8 +1,52 @@
 * { margin: 0; }
 
+body {
+  font-family: Karla;
+}
+
 #dmBox {
+  position: relative;
+  top: 90vh;
+  right: 33px;
+
+  float: right;
+
+  width: 25vw;
+  height: 5vh;
+
+  border-radius: 5px;
+  border: 1px solid black;
+
+  padding-left:10px ;
+}
+
+
+#dm {
   width: 30vw;
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  height: 100vh;
+
+  border-left: 1px solid;
+  float:right;
+
+  color: #c6c6c6;
+
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  #dm {
+    width: 100vw;
+  }
+
+  #dmBox {
+    width: 90vw;
+    right: 15px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+
+  #dmBox {
+    right: 20px;
+  }
 }
