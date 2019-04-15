@@ -24,15 +24,15 @@ function submit() {
 
 room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
-    createBoxForCurrUser(data);
+    createBoxForCurrUser(data, uuid);
   }
-  createBoxForOtherUser(data);
+  createBoxForOtherUser(data, uuid);
 });
 
 // room.history().then((history) => {
 //   console.log('got array of all messages in channel', history);
 // });
-function createBoxForCurrUser(data) {
+function createBoxForCurrUser(data, uuid) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
   var span = document.createElement('span');
@@ -58,7 +58,7 @@ function createBoxForCurrUser(data) {
   dm.appendChild(box);
 }
 
-function createBoxForOtherUser(data) {
+function createBoxForOtherUser(data, uuid) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
   var span = document.createElement('span');
