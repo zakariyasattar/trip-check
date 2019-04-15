@@ -21,6 +21,11 @@ body {
   padding-left:10px ;
 }
 
+#coolHeader {
+  float: left;
+  position: relative;
+  bottom: 45px;
+}
 
 #dm {
   width: 30vw;
