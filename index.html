@@ -3,26 +3,21 @@
   <head>
   	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  	<title>Trip-Check</title>
-
-  	<script src="./bower_components/rltm/web/rltm.js"></script>
+  	<title>Trip Check</title>
+  	<link rel="shortcut icon" href="assets/favicon.ico">
+  	<link href="https://fonts.googleapis.com/css?family=Karla|Work+Sans|Muli" rel="stylesheet">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  	<link href="main.css" rel="stylesheet" type="text/css" />
+  	<link href="title.css" rel="stylesheet" type="text/css" />
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="./bower_components/rltm/web/rltm.js"></script>
 
 	</head>
 
 	<body>
-<<<<<<< HEAD
- <h1><left><span class="T">TRIP</span><span class="R">  </span>
-      <span class="i"> </span><span class="p">CHECK</span></left></h1>
+ <h1><span class="T">TRIP</span><span class="R">  </span>
+      <span class="i"> </span><span class="p">CHECK</span></h1>
 
     <input id="text" type="textbox"></input>
     <button id="submitButton" onclick="submit()">Submit</button>
@@ -36,17 +31,23 @@
           subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b'
             }
       });
-=======
->>>>>>> c5198a3e9efc3f20e9f937b7e721368cf8b1103b
 
+      room = user.join('trip-check');
 
-    <div id="dm">
-      <input id="dmBox" type="textbox" placeholder="Send a message"></input>
-    </div>
+      function submit() {
+        var val = document.getElementById("text").value;
+        room.message({hello: val});
+      }
 
+      room.on('message', (uuid, data) => {
+        console.log(data.hello);
+      });
 
-    <script src="main.js"></script>
+      room.history().then((history) => {
+        console.log('got array of all messages in channel', history);
+    });
 
+    </script>
 	</body>
 
 </html>
