@@ -20,6 +20,24 @@
 	</head>
 
 	<body>
+<<<<<<< HEAD
+ <h1><left><span class="T">TRIP</span><span class="R">  </span>
+      <span class="i"> </span><span class="p">CHECK</span></left></h1>
+
+    <input id="text" type="textbox"></input>
+    <button id="submitButton" onclick="submit()">Submit</button>
+
+
+    <script>
+      let user = rltm({
+      service: 'pubnub',
+      config: {
+          publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
+          subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b'
+            }
+      });
+=======
+>>>>>>> c5198a3e9efc3f20e9f937b7e721368cf8b1103b
 
 
     <div id="dm">
