@@ -45,6 +45,10 @@ body {
     width: 100vw;
   }
 
+  #coolHeader {
+    display: none;
+  }
+
   #dmBox {
     width: 90vw;
     right: 15px;
