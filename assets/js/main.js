@@ -26,7 +26,9 @@ room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
     createBoxForCurrUser(data, uuid);
   }
-  createBoxForOtherUser(data, uuid);
+  else{
+    createBoxForOtherUser(data, uuid);
+  }
 });
 
 // room.history().then((history) => {

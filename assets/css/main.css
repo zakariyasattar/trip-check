@@ -6,7 +6,7 @@ body {
 }
 
 #dmBox {
-  position: relative;
+  position: absolute;
   top: 90vh;
   right: 33px;
 
@@ -25,6 +25,7 @@ body {
   float: left;
   position: relative;
   bottom: 45px;
+  left: 10vw;
 }
 
 #dm {
