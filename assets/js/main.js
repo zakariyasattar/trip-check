@@ -9,12 +9,25 @@ config: {
 
 room = user.join('trip-check');
 
-function submit() {
-  var boxVal = document.getElementById("dmBox").value;
+function sendMessage() {
+  var boxVal = document.getElementById('dmBox').value;
 
   if(boxVal != "") {
     room.message({message: boxVal});
     $('#dmBox').val("");
+  }
+}
+
+
+function sendChildDown() {
+  alert(document.getElementById('studentName').value);
+
+  var studentSelectBox = document.getElementById('studentSelectBox');
+  var dm = document.getElementById('dm');
+
+  if(studentName != "") {
+    studentSelectBox.style.display = "none";
+    dm.style.display = "initial";
   }
 }
 
@@ -26,9 +39,9 @@ room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
     createBoxForCurrUser(data, uuid);
   }
-  else{
+  //else{
     createBoxForOtherUser(data, uuid);
-  }
+  //}
 });
 
 // room.history().then((history) => {
@@ -37,7 +50,9 @@ room.on('message', (uuid, data) => {
 function createBoxForCurrUser(data, uuid) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
-  var span = document.createElement('span');
+
+  var messageText = document.createElement('span');
+  var info = document.createElement('span');
 
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
@@ -46,48 +61,72 @@ function createBoxForCurrUser(data, uuid) {
   box.style.borderRadius = "10px 10px 0 10px";
 
   box.style.float = "right"
-  box.style.position = "relative";
+  box.style.position = "absolute";
   box.style.right = "20px";
 
-  span.innerHTML = data.message;
+  messageText.innerHTML = data.message;
+  info.innerHTML = uuid;
 
-  span.style.paddingRight = "20px";
-  span.style.paddingLeft = "20px";
-  span.style.paddingTop = "20px";
-  span.style.paddingBottom = "20px";
+  info.style.float = "right";
+  info.style.position = "relative";
+  info.style.bottom = "30px";
+  info.style.right = "15px";
+  info.style.color = "#a5a4a5";
 
-  box.appendChild(span);
+  messageText.style.paddingRight = "20px";
+  messageText.style.paddingLeft = "20px";
+  messageText.style.paddingTop = "20px";
+  messageText.style.paddingBottom = "20px";
+
+
+  dm.appendChild(info);
+  box.appendChild(messageText);
   dm.appendChild(box);
+  dm.appendChild(document.createElement('br'));
 }
 
 function createBoxForOtherUser(data, uuid) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
-  var span = document.createElement('span');
+
+  var messageText = document.createElement('span');
+  var info = document.createElement('span');
 
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
 
-  box.style.background = "blue";
+  box.style.background = "#3264fc";
   box.style.color = "white";
   box.style.borderRadius = "10px 10px 10px 0px";
-  box.style.paddingRight = "10px";
-  box.style.paddingLeft = "10px";
-  box.style.float = "left"
 
-  span.innerHTML = data.message;
+  box.style.float = "left";
+  box.style.position = "relative";
+  box.style.right = "60px";
 
-  span.style.paddingRight = "20px";
-  span.style.paddingLeft = "20px";
-  span.style.paddingTop = "20px";
-  span.style.paddingBottom = "20px";
+  messageText.innerHTML = data.message;
+  info.innerHTML = uuid;
 
-  box.appendChild(span);
+  info.style.float = "left";
+  info.style.position = "relative";
+  info.style.bottom = "30px";
+  info.style.left = "15px";
+  info.style.color = "#a5a4a5";
+
+  messageText.style.paddingRight = "20px";
+  messageText.style.paddingLeft = "20px";
+  messageText.style.paddingTop = "20px";
+  messageText.style.paddingBottom = "20px";
+
+
+  dm.appendChild(info);
+  box.appendChild(messageText);
   dm.appendChild(box);
+  dm.appendChild(document.createElement('br'));
 }
+
 
 $(document).keypress(function(e) {
     if(e.which == 13) {
-        submit();
+        sendMessage();
     }
 });
