@@ -57,8 +57,8 @@ function createBoxForCurrUser(data, uuid) {
   box.style.borderRadius = "10px 10px 0 10px";
 
   box.style.float = "right"
-  box.style.position = "absolute";
-  box.style.right = "20px";
+  box.style.position = "relative";
+  box.style.right = "-108px";
 
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -102,7 +102,7 @@ function createBoxForOtherUser(data, uuid) {
   box.style.borderRadius = "10px 10px 10px 0px";
 
   box.style.float = "left";
-  box.style.position = "absolute";
+  box.style.position = "relative";
   box.style.right = "60px";
 
   messageText.innerHTML = data.message;
