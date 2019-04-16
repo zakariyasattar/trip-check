@@ -20,14 +20,10 @@ function sendMessage() {
 
 
 function sendChildDown() {
-  alert(document.getElementById('studentName').value);
-
-  var studentSelectBox = document.getElementById('studentSelectBox');
-  var dm = document.getElementById('dm');
+  var studentName = document.getElementById('studentName').value;
 
   if(studentName != "") {
-    studentSelectBox.style.display = "none";
-    dm.style.display = "initial";
+    room.message({message: "Hey, just sent down " + studentName});
   }
 }
 
@@ -39,9 +35,9 @@ room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
     createBoxForCurrUser(data, uuid);
   }
-  //else{
+  else{
     createBoxForOtherUser(data, uuid);
-  //}
+  }
 });
 
 // room.history().then((history) => {
@@ -64,8 +60,13 @@ function createBoxForCurrUser(data, uuid) {
   box.style.position = "absolute";
   box.style.right = "20px";
 
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+
   messageText.innerHTML = data.message;
-  info.innerHTML = uuid;
+  info.innerHTML = dateTime;
 
   info.style.float = "right";
   info.style.position = "relative";
@@ -77,6 +78,7 @@ function createBoxForCurrUser(data, uuid) {
   messageText.style.paddingLeft = "20px";
   messageText.style.paddingTop = "20px";
   messageText.style.paddingBottom = "20px";
+  messageText.style.width = "27vw";
 
 
   dm.appendChild(info);
@@ -100,7 +102,7 @@ function createBoxForOtherUser(data, uuid) {
   box.style.borderRadius = "10px 10px 10px 0px";
 
   box.style.float = "left";
-  box.style.position = "relative";
+  box.style.position = "absolute";
   box.style.right = "60px";
 
   messageText.innerHTML = data.message;

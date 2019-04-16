@@ -26,11 +26,7 @@ body {
   float: left;
   position: relative;
   bottom: 45px;
-  left: 25vw;
-
-  /* position: relative;
-  bottom: 45px;
-  left: 10vw; */
+  left: 10vw;
 }
 
 #dm {
@@ -44,6 +40,8 @@ body {
 
   padding-left: 20px;
   overflow: overlay;
+
+  word-wrap: break-word;
 }
 
 @media only screen and (max-width: 600px) {
