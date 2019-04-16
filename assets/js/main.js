@@ -3,7 +3,7 @@ service: 'pubnub',
 config: {
     publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
     subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b',
-    uuid: 'test_user'
+    uuid: 's'
   }
 });
 
@@ -103,7 +103,6 @@ function createBoxForOtherUser(data, uuid) {
 
   box.style.float = "left";
   box.style.position = "relative";
-  box.style.right = "60px";
 
   messageText.innerHTML = data.message;
   info.innerHTML = uuid;
