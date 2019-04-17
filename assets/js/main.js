@@ -147,7 +147,6 @@ $(document).keypress(function(e) {
 });
 
 // style div on top of DMBOX according to uuids
-
 var uuidDivCurrUser = document.getElementById('currUser');
 
 uuidDivCurrUser.innerHTML = user.pubnub.getUUID();

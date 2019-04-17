@@ -67,10 +67,21 @@ body {
 @media only screen and (max-width: 600px) {
   #dm {
     width: 100vw;
+    top: 100vh;
+    position: relative;
   }
 
-  #coolHeader {
-    display: none;
+
+  #dm #uuid #otherUser {
+    width: 49.96vw;
+  }
+
+  #dm #uuid #currUser {
+    width: 49.8vw;
+  }
+
+  #studentSelectBox {
+    width: 100vw;
   }
 
   #dmBox {
@@ -80,7 +91,6 @@ body {
 }
 
 @media only screen and (max-width: 900px) {
-
   #dmBox {
     right: 20px;
   }
