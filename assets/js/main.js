@@ -1,3 +1,4 @@
+// initiate user variable to send/receive messages
 let user = rltm({
 service: 'pubnub',
 config: {
@@ -7,8 +8,10 @@ config: {
   }
 });
 
+// join room with Student Services rep
 room = user.join('trip-check');
 
+// send message based on value in message box
 function sendMessage() {
   var boxVal = document.getElementById('dmBox').value;
 
@@ -18,7 +21,7 @@ function sendMessage() {
   }
 }
 
-
+// send automated message down to Student Services sending student down based on text box
 function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
 
@@ -31,6 +34,7 @@ function sendChildDown() {
 //     console.log('users online', users);
 // });
 
+// check if room receives message and style based on who sent it
 room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
     createBoxForCurrUser(data, uuid);
@@ -43,6 +47,8 @@ room.on('message', (uuid, data) => {
 // room.history().then((history) => {
 //   console.log('got array of all messages in channel', history);
 // });
+
+// create message div for current user
 function createBoxForCurrUser(data, uuid) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
@@ -87,6 +93,8 @@ function createBoxForCurrUser(data, uuid) {
   dm.appendChild(document.createElement('br'));
 }
 
+
+// create message div for receiving user
 function createBoxForOtherUser(data, uuid) {
   var box = document.createElement('div');
   var dm = document.getElementById("dm");
@@ -131,9 +139,15 @@ function createBoxForOtherUser(data, uuid) {
   dm.appendChild(document.createElement('br'));
 }
 
-
+// listen for 'enter' keypress to send message
 $(document).keypress(function(e) {
     if(e.which == 13) {
         sendMessage();
     }
 });
+
+// style div on top of DMBOX according to uuids
+
+var uuidDivCurrUser = document.getElementById('currUser');
+
+uuidDivCurrUser.innerHTML = user.pubnub.getUUID();
