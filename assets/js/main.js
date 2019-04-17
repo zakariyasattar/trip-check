@@ -3,7 +3,7 @@ service: 'pubnub',
 config: {
     publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
     subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b',
-    uuid: 's'
+    uuid: 'test_user'
   }
 });
 
@@ -103,14 +103,20 @@ function createBoxForOtherUser(data, uuid) {
 
   box.style.float = "left";
   box.style.position = "relative";
+  box.style.right = "7.7vw";
+
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
 
   messageText.innerHTML = data.message;
-  info.innerHTML = uuid;
+  info.innerHTML = dateTime;
 
   info.style.float = "left";
   info.style.position = "relative";
   info.style.bottom = "30px";
-  info.style.left = "15px";
+  info.style.left = "10px";
   info.style.color = "#a5a4a5";
 
   messageText.style.paddingRight = "20px";
