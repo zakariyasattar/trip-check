@@ -1,11 +1,3 @@
-//init cache
-var x = new Array();
-x.push(0);
-
-if(localStorage['currentOut'].length == 0){
-  localStorage['currentOut'] = x;
-}
-
 // initiate user variable to send/receive messages
 let user = rltm({
 service: 'pubnub',
@@ -34,18 +26,16 @@ function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
 
   if(studentName != "") {
-    var cachedArray = localStorage['currentOut'].split();
-    console.log(cachedArray);
-
     room.message({message: "Hey, just sent down " + studentName});
-    cachedArray.push(studentName);
-    cachedArray[0] = parseInt(cachedArray[0]) + 1;
 
-    console.log(cachedArray);
-    cachedArray = cachedArray.join();
-
-    localStorage['currentOut'] = cachedArray;
+    if(localStorage.length == 0) {
+      localStorage['currentOut'] += studentName;
+    }
+    localStorage['currentOut'] += studentName + ",";
   }
+  $('#studentName').val("");
+
+  refreshBoxes();
 }
 
 // room.here().then((users) => {
@@ -168,3 +158,25 @@ $(document).keypress(function(e) {
 var uuidDivCurrUser = document.getElementById('currUser');
 
 uuidDivCurrUser.innerHTML = user.pubnub.getUUID();
+
+//create boxes based on who teachers send out
+function refreshBoxes() {
+  var storage = localStorage['currentOut'].split(',');
+
+  for(var i = 0; i < storage.length - 1; i++) {
+    createDivBox(storage[i]);
+  }
+}
+
+//create div box for students out
+function createDivBox(name) {
+  var statusBox = document.getElementById('status');
+  var span = document.createElement('span');
+
+  span.innerHTML = name;
+  span.style.borderBottom = "1px solid black";
+
+  statusBox.appendChild(document.createElement('br'));
+  statusBox.appendChild(span);
+
+}
