@@ -156,8 +156,23 @@ body {
     height: 10vh;
   }
 
-
   #dm #uuid #currUser {
     height: 10vh;
+  }
+
+  #studentName {
+    position: relative;
+    top: 80px;
+    left: 10px;
+  }
+
+  #submitText {
+    position: relative;
+    top: 80px;
+  }
+
+  #submit {
+    position: relative;
+    top: 80px;
   }
 }

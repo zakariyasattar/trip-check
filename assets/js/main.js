@@ -1,3 +1,12 @@
+//init cache
+var x = new Array();
+x.push(0);
+x.push(5);
+
+if(localStorage['currentOut'].length == 0){
+  localStorage['currentOut'] = new Array();
+}
+
 // initiate user variable to send/receive messages
 let user = rltm({
 service: 'pubnub',
@@ -26,7 +35,15 @@ function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
 
   if(studentName != "") {
+    var cachedArray = localStorage['currentOut'];
+    console.log(cachedArray);
+
     room.message({message: "Hey, just sent down " + studentName});
+    cachedArray[0] = parseInt(cachedArray[0]) + 1;
+    cachedArray.push(studentName);
+    console.log(cachedArray);
+
+    localStorage['currentOut'] = cachedArray;
   }
 }
 
