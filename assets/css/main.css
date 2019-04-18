@@ -3,6 +3,9 @@
 body {
   font-family: Karla;
   background: #5b6be5;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #dmBox {
@@ -47,10 +50,11 @@ body {
 
   width: 14.96vw;
   height: 5vh;
-
+  text-align: center;
   float:left;
   color: white;
-  text-align: center;
+
+  padding-top: 6px;
 }
 
 
@@ -62,18 +66,26 @@ body {
 
   float:right;
   text-align: center;
+  padding-top: 6px;
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    width: 100vw;
+  }
   #dm {
     width: 100vw;
-    top: 100vh;
+    top: 60vh;
     position: relative;
   }
 
+  #coolHeader {
+    position: relative;
+    bottom: 80px;
+  }
 
   #dm #uuid #otherUser {
-    width: 49.96vw;
+    width: 49.8vw;
   }
 
   #dm #uuid #currUser {
@@ -88,11 +100,49 @@ body {
     width: 90vw;
     right: 15px;
   }
+
+  #studentName {
+    position: relative;
+    right: 20px;
+
+    top: 40px;
+  }
+
+  #submitText {
+    position: relative;
+    right: 20px;
+
+    top: 40px;
+  }
+
+  #submit {
+    position: relative;
+    right: 20px;
+    width: 40vh;
+    top: 60px;
+  }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (min-width: 600px) and (max-width: 900px) {
   #dmBox {
     right: 20px;
+  }
+  #dm #uuid #otherUser {
+    width: 15vw;
+  }
+
+  #dm #uuid #currUser {
+    width: 14.7vw;
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1210px) {
+  #dm #uuid #otherUser {
+    width: 15vw;
+  }
+
+  #dm #uuid #currUser {
+    width: 14.7vw;
   }
 }
 
