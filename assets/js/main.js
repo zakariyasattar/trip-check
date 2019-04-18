@@ -27,11 +27,7 @@ function sendChildDown() {
 
   if(studentName != "") {
     room.message({message: "Hey, just sent down " + studentName});
-
-    if(localStorage.length == 0) {
-      localStorage['currentOut'] += studentName;
-    }
-    localStorage['currentOut'] += studentName + ",";
+      localStorage['currentOut'] += studentName + ",";
   }
   $('#studentName').val("");
 
@@ -161,6 +157,7 @@ uuidDivCurrUser.innerHTML = user.pubnub.getUUID();
 
 //create boxes based on who teachers send out
 function refreshBoxes() {
+  var statusBox = document.getElementById('status').innerHTML = "";
   var storage = localStorage['currentOut'].split(',');
 
   for(var i = 0; i < storage.length - 1; i++) {
