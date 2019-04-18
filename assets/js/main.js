@@ -1,10 +1,9 @@
 //init cache
 var x = new Array();
 x.push(0);
-x.push(5);
 
 if(localStorage['currentOut'].length == 0){
-  localStorage['currentOut'] = new Array();
+  localStorage['currentOut'] = x;
 }
 
 // initiate user variable to send/receive messages
@@ -35,13 +34,15 @@ function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
 
   if(studentName != "") {
-    var cachedArray = localStorage['currentOut'];
+    var cachedArray = localStorage['currentOut'].split();
     console.log(cachedArray);
 
     room.message({message: "Hey, just sent down " + studentName});
-    cachedArray[0] = parseInt(cachedArray[0]) + 1;
     cachedArray.push(studentName);
+    cachedArray[0] = parseInt(cachedArray[0]) + 1;
+
     console.log(cachedArray);
+    cachedArray = cachedArray.join();
 
     localStorage['currentOut'] = cachedArray;
   }
