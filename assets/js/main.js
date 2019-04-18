@@ -1,3 +1,6 @@
+// constantly check for an update to the currently out div
+setInterval(function(){refreshBoxes()}, 50);
+
 // initiate user variable to send/receive messages
 let user = rltm({
 service: 'pubnub',
@@ -34,10 +37,6 @@ function sendChildDown() {
   refreshBoxes();
 }
 
-// room.here().then((users) => {
-//     console.log('users online', users);
-// });
-
 // check if room receives message and style based on who sent it
 room.on('message', (uuid, data) => {
   if(uuid == 'test_user'){
@@ -47,10 +46,6 @@ room.on('message', (uuid, data) => {
     createBoxForOtherUser(data, uuid);
   }
 });
-
-// room.history().then((history) => {
-//   console.log('got array of all messages in channel', history);
-// });
 
 // create message div for current user
 function createBoxForCurrUser(data, uuid) {
@@ -169,11 +164,42 @@ function refreshBoxes() {
 function createDivBox(name) {
   var statusBox = document.getElementById('status');
   var span = document.createElement('span');
+  var status = document.createElement('span');
+
+  var statusCircle = document.createElement('i');
+  statusCircle.className = "fas fa-circle";
+
+  statusCircle.style.border = "1.5px solid black";
+  statusCircle.style.borderRadius = "100%";
+
+  if(false){
+    statusCircle.style.color = "green";
+  }
+  else {
+    statusCircle.style.color = "red";
+  }
+
+  var studentBox = document.createElement('div');
+
+  var divWidth = statusBox.offsetWidth;
+
+  studentBox.style.width = divWidth;
+  studentBox.style.height = "2vw";
+  studentBox.style.borderBottom = "1px solid black";
+  studentBox.style.whiteSpace = "normal";
 
   span.innerHTML = name;
-  span.style.borderBottom = "1px solid black";
+  span.style.paddingLeft = "20px";
+
+  status.innerHTML = "Status: ";
+  status.appendChild(statusCircle);
+  status.style.float = "right";
+  status.style.paddingRight = "20px";
+
+  studentBox.appendChild(span);
+  studentBox.appendChild(status);
 
   statusBox.appendChild(document.createElement('br'));
-  statusBox.appendChild(span);
+  statusBox.appendChild(studentBox);
 
 }

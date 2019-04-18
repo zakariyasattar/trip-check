@@ -43,6 +43,10 @@ body {
   overflow: overlay;
 
   word-wrap: break-word;
+
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 #dm #uuid #otherUser {
@@ -67,6 +71,24 @@ body {
   float:right;
   text-align: center;
   padding-top: 6px;
+}
+
+#status {
+  position: relative; 
+  top: 300px; 
+  left: 10vw;
+
+  border: 1px solid;
+  border-radius: 12px;
+
+  width: 45vw;
+  height: 40vh;
+
+  background: white;
+
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 @media only screen and (max-width: 600px) {
