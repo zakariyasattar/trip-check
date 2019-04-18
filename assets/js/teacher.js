@@ -1,6 +1,7 @@
 // constantly check for an update to the currently out div
 setInterval(function(){refreshBoxes()}, 50);
 
+
 // initiate user variable to send/receive messages
 let user = rltm({
 service: 'pubnub',
@@ -138,6 +139,7 @@ function createBoxForOtherUser(data, uuid) {
   dm.appendChild(document.createElement('br'));
 }
 
+
 // listen for 'enter' keypress to send message
 $(document).keypress(function(e) {
     if(e.which == 13) {
@@ -167,17 +169,25 @@ function createDivBox(name) {
   var status = document.createElement('span');
 
   var statusCircle = document.createElement('i');
-  statusCircle.className = "fas fa-circle";
 
-  statusCircle.style.border = "1.5px solid black";
+  statusCircle.className = "fas fa-circle";
   statusCircle.style.borderRadius = "100%";
 
-  if(false){
+  if(true){
     statusCircle.style.color = "green";
   }
   else {
     statusCircle.style.color = "red";
   }
+
+  var useTimes = document.createElement('a');
+  useTimes.href = "javascript:removeEntry(\""  +name +"\")";
+  useTimes.style.textDecoration = "none";
+
+  useTimes.className = "fas fa-times";
+  useTimes.id = "times";
+  useTimes.style.cursor = "pointer";
+  useTimes.style.marginLeft = "40px";
 
   var studentBox = document.createElement('div');
 
@@ -192,7 +202,10 @@ function createDivBox(name) {
   span.style.paddingLeft = "20px";
 
   status.innerHTML = "Status: ";
+
   status.appendChild(statusCircle);
+  status.appendChild(useTimes);
+
   status.style.float = "right";
   status.style.paddingRight = "20px";
 
@@ -202,4 +215,8 @@ function createDivBox(name) {
   statusBox.appendChild(document.createElement('br'));
   statusBox.appendChild(studentBox);
 
+}
+
+function removeEntry(name) {
+  alert(name);
 }
