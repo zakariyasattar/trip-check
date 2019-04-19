@@ -1,9 +1,9 @@
-// constantly check for an update to the currently out div
-setInterval(function(){
-  if(hasChanged()) {
+// Everytime there is a db update, refresh
+firebase.database().ref('studentsOut').on('value', function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
     refreshBoxes();
-  }
-}, 50);
+  });
+});
 
 
 // initiate user variable to send/receive messages
@@ -35,7 +35,7 @@ function sendChildDown() {
 
   if(studentName != "") {
     room.message({message: "Hey, just sent down " + studentName});
-      localStorage['currentOut'] += studentName + ",";
+    firebase.database().ref('studentsOut').push(studentName);
   }
   $('#studentName').val("");
 
@@ -159,32 +159,15 @@ uuidDivCurrUser.innerHTML = user.pubnub.getUUID();
 //create boxes based on who teachers send out
 function refreshBoxes() {
   var statusBox = document.getElementById('status').innerHTML = "";
-  var storage = localStorage['currentOut'].split(',');
 
-  for(var i = 0; i < storage.length - 1; i++) {
-    createDivBox(storage[i]);
-  }
+	firebase.database().ref('studentsOut').once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+      createDivBox(childSnapshot.val());
+	   });
+	});
+
 }
 
-//check if there is a difference in cache and display
-function hasChanged() {
-  var boxes = document.getElementById('status').getElementsByClassName('studentBox');
-
-  var localNames = localStorage['currentOut'].split(",");
-  localNames.pop();
-
-  var names = [];
-
-  for(var i = 0; i < boxes.length; i++) {
-    var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
-    names.push(name);
-  }
-
-  if(JSON.stringify(names)==JSON.stringify(localNames)){
-    return false;
-  }
-  return true;
-}
 
 //create div box for students out
 function createDivBox(name) {
@@ -255,13 +238,13 @@ function removeEntry(nameToRemove) {
     }
   }
 
-  var localNames = localStorage['currentOut'].split(",");
-  localNames.pop();
+  firebase.database().ref('studentsOut').once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val() == nameToRemove) {
+        alert("hell");
+        firebase.database().ref('studentOut').child(childSnapshot.key).remove();
+      }
+	  });
+	});
 
-  for(var j = 0; j < localNames.length; j++) {
-    if(localNames[j] == nameToRemove) {
-      localNames.splice(j, 1);
-    }
-  }
-  localStorage['currentOut'] = localNames;
 }
