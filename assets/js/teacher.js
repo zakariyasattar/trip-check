@@ -1,5 +1,9 @@
-// constantly check for an update to the currently out div
-setInterval(function(){refreshBoxes()}, 50);
+// // constantly check for an update to the currently out div
+// setInterval(function(){
+//   if(hasChanged()) {
+//     refreshBoxes();
+//   }
+// }, 50);
 
 
 // initiate user variable to send/receive messages
@@ -162,6 +166,26 @@ function refreshBoxes() {
   }
 }
 
+//check if there is a difference in cache and display
+function hasChanged() {
+  var boxes = document.getElementById('status').getElementsByClassName('studentBox');
+
+  var localNames = localStorage['currentOut'].split(",");
+  localNames.pop();
+
+  var names = [];
+
+  for(var i = 0; i < boxes.length; i++) {
+    var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
+    names.push(name);
+  }
+
+  if(JSON.stringify(names)==JSON.stringify(localNames)){
+    return false;
+  }
+  return true;
+}
+
 //create div box for students out
 function createDivBox(name) {
   var statusBox = document.getElementById('status');
@@ -196,9 +220,11 @@ function createDivBox(name) {
   studentBox.style.width = divWidth;
   studentBox.style.height = "2vw";
   studentBox.style.borderBottom = "1px solid black";
-  studentBox.style.whiteSpace = "normal";
+
+  studentBox.className = "studentBox";
 
   span.innerHTML = name;
+  span.value = "name";
   span.style.paddingLeft = "20px";
 
   status.innerHTML = "Status: ";
@@ -217,6 +243,24 @@ function createDivBox(name) {
 
 }
 
-function removeEntry(name) {
-  alert(name);
+function removeEntry(nameToRemove) {
+  var boxes = document.getElementById('status').getElementsByClassName('studentBox');
+  var finalString = "";
+
+  for(var i = 0; i < boxes.length; i++) {
+    var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
+    if(name == nameToRemove) {
+      boxes[i].style.display = "none";
+    }
+  }
+
+  var localNames = localStorage['currentOut'].split(",");
+  localNames.pop();
+
+  for(var j = 0; j < localNames.length; j++) {
+    if(localNames[j] == nameToRemove) {
+      localNames.splice(j, 1);
+    }
+  }
+  localStorage['currentOut'] = localNames;
 }

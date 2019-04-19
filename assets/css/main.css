@@ -74,8 +74,8 @@ body {
 }
 
 #status {
-  position: relative;
-  top: 25vh;
+  position: fixed;
+  top: 50vh;
   left: 10vw;
 
   border: 1px solid;
@@ -86,9 +86,7 @@ body {
 
   background: white;
 
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: scroll;
 }
 
 @media only screen and (max-width: 600px) {
