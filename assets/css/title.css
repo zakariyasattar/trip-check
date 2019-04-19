@@ -52,10 +52,21 @@ h1 span:nth-child(4) {
   padding-left: 2px;
 }
 
-a, a:visited {
-  text-decoration: none;
-  border-bottom: 1px solid red;
-}
 a:hover {
   color: red;
+}
+
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 20px;
+    position: relative;
+    right: 5vw;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  h1 {
+    font-size: 30px;
+  }
 }

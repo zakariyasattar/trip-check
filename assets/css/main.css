@@ -93,15 +93,17 @@ body {
   body {
     width: 100vw;
   }
+
   #dm {
     width: 100vw;
-    top: 60vh;
+    top: 70vh;
     position: relative;
   }
 
   #coolHeader {
     position: relative;
     bottom: 80px;
+    width: 100vw;
   }
 
   #dm #uuid #otherUser {
@@ -125,25 +127,28 @@ body {
     position: relative;
     right: 20px;
 
-    top: 40px;
+    bottom: 6vh;
   }
 
   #submitText {
     position: relative;
     right: 20px;
 
-    top: 40px;
+    bottom: 6vh;
   }
 
   #submit {
     position: relative;
     right: 20px;
     width: 40vh;
-    top: 60px;
+    bottom: 2vh;
   }
 
-  a {
-    text-decoration: none;
+  #status {
+    width: 90vw;
+
+    left: 5vw;
+    position: absolute;
   }
 
 @media only screen and (min-width: 600px) and (max-width: 900px) {
@@ -155,7 +160,7 @@ body {
   }
 
   #dm #uuid #currUser {
-    width: 14.7vw;
+    width: 15vw;
   }
 }
 

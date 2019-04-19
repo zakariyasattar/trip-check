@@ -1,9 +1,9 @@
-// // constantly check for an update to the currently out div
-// setInterval(function(){
-//   if(hasChanged()) {
-//     refreshBoxes();
-//   }
-// }, 50);
+// constantly check for an update to the currently out div
+setInterval(function(){
+  if(hasChanged()) {
+    refreshBoxes();
+  }
+}, 50);
 
 
 // initiate user variable to send/receive messages
@@ -251,6 +251,7 @@ function removeEntry(nameToRemove) {
     var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
     if(name == nameToRemove) {
       boxes[i].style.display = "none";
+      break;
     }
   }
 
