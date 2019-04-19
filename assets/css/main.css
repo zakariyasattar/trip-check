@@ -23,6 +23,8 @@ body {
 
   padding-left: 10px;
   padding-right: 10px;
+  overflow: none;
+
 }
 
 #coolHeader {
@@ -40,13 +42,7 @@ body {
   float:right;
 
   background: #eceff1;
-  overflow: overlay;
-
-  word-wrap: break-word;
-
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: scroll;
 }
 
 #dm #uuid #otherUser {

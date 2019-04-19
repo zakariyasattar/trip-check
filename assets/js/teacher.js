@@ -70,12 +70,18 @@ function createBoxForCurrUser(data, uuid) {
   box.style.position = "relative";
   box.style.right = "-108px";
 
+  box.style.wordWrap= "normal";
+  box.style.maxWidth = "20vw";
+
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date+' '+time;
 
   messageText.innerHTML = data.message;
+  messageText.style.width = "20vw";
+  messageText.style.wordWrap= "break-word";
+
   info.innerHTML = dateTime;
 
   info.style.float = "right";
@@ -113,9 +119,8 @@ function createBoxForOtherUser(data, uuid) {
   box.style.color = "white";
   box.style.borderRadius = "10px 10px 10px 0px";
 
-  box.style.float = "left";
-  box.style.position = "relative";
-  box.style.right = "7.7vw";
+  box.style.wordWrap= "normal";
+  box.style.maxWidth = "20vw";
 
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -123,6 +128,9 @@ function createBoxForOtherUser(data, uuid) {
   var dateTime = date+' '+time;
 
   messageText.innerHTML = data.message;
+  messageText.style.width = "20vw";
+  messageText.style.wordWrap= "break-word";
+
   info.innerHTML = dateTime;
 
   info.style.float = "left";
@@ -181,10 +189,10 @@ function createDivBox(name) {
   statusCircle.style.borderRadius = "100%";
 
   if(true){
-    statusCircle.style.color = "#4bd859";
+    statusCircle.style.color = "#f2e341";
   }
   else {
-    statusCircle.style.color = "#f72a48";
+    statusCircle.style.color = "#4bd859";
   }
 
   var useTimes = document.createElement('a');
