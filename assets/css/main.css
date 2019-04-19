@@ -74,8 +74,8 @@ body {
 }
 
 #status {
-  position: relative; 
-  top: 300px; 
+  position: relative;
+  top: 25vh;
   left: 10vw;
 
   border: 1px solid;
