@@ -130,20 +130,6 @@ body {
     bottom: 6vh;
   }
 
-  #submitText {
-    position: relative;
-    right: 20px;
-
-    bottom: 6vh;
-  }
-
-  #submit {
-    position: relative;
-    right: 20px;
-    width: 40vh;
-    bottom: 2vh;
-  }
-
   #status {
     width: 90vw;
 

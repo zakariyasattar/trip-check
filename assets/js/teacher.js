@@ -241,8 +241,7 @@ function removeEntry(nameToRemove) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val() == nameToRemove) {
-        alert("hell");
-        firebase.database().ref('studentOut').child(childSnapshot.key).remove();
+        firebase.database().ref('studentsOut').child(childSnapshot.key).remove();
       }
 	  });
 	});
