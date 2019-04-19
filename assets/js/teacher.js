@@ -174,10 +174,10 @@ function createDivBox(name) {
   statusCircle.style.borderRadius = "100%";
 
   if(true){
-    statusCircle.style.color = "green";
+    statusCircle.style.color = "#4bd859";
   }
   else {
-    statusCircle.style.color = "red";
+    statusCircle.style.color = "#f72a48";
   }
 
   var useTimes = document.createElement('a');
