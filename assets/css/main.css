@@ -10,7 +10,7 @@ body {
 
 #dmBox {
   position: absolute;
-  top: 90vh;
+  bottom: 5vh;
   right: 33px;
 
   float: right;
@@ -36,13 +36,25 @@ body {
 
 #dm {
   width: 30vw;
-  height: 100vh;
+  height: 88vh;
 
   border-left: 1px solid;
   float:right;
 
   background: #eceff1;
   overflow: scroll;
+}
+
+#dmBottom {
+  border-left: 1px solid black;
+  width: 30vw;
+  height: 12vh;
+
+  position: relative;
+  top: 88vh;
+  left: 70vw;
+
+  background: #eceff1;
 }
 
 #dm #uuid #otherUser {
@@ -94,6 +106,14 @@ body {
     width: 100vw;
     top: 70vh;
     position: relative;
+    border: none;
+  }
+
+  #dmBottom {
+    width: 100vw;
+    top: 175vh;
+    left: -1vw;
+    position: relative;
   }
 
   #coolHeader {
@@ -135,7 +155,7 @@ body {
 
 @media only screen and (min-width: 600px) and (max-width: 900px) {
   #dmBox {
-    right: 20px;
+    right: 60px;
   }
   #dm #uuid #otherUser {
     width: 15vw;
@@ -146,7 +166,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 900px) and (max-width: 1210px) {
+@media only screen and (min-width: 901px) and (max-width: 1210px) {
   #dm #uuid #otherUser {
     width: 15vw;
   }
