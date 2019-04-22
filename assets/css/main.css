@@ -42,8 +42,12 @@ body {
   float:right;
 
   background: #eceff1;
-  overflow: scroll;
+  overflow: auto;
 }
+
+#dm::-webkit-scrollbar { width: 0 !important }
+#dm {overflow: -moz-scrollbars-none; }
+#dm { -ms-overflow-style: none; }
 
 #dmBottom {
   border-left: 1px solid black;
@@ -56,7 +60,9 @@ body {
 
   background: #eceff1;
 }
-
+#dm #uuid{
+  position:absolute;
+}
 #dm #uuid #otherUser {
   background: #3264fc;
 
@@ -79,6 +85,7 @@ body {
   float:right;
   text-align: center;
   padding-top: 6px;
+
 }
 
 #status {
@@ -94,7 +101,7 @@ body {
 
   background: white;
 
-  overflow: scroll;
+  /* overflow: auto; */
 }
 
 @media only screen and (max-width: 600px) {
@@ -114,6 +121,7 @@ body {
     top: 175vh;
     left: -1vw;
     position: relative;
+
   }
 
   #coolHeader {
