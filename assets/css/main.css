@@ -152,17 +152,18 @@ body {
     left: 5vw;
     position: absolute;
   }
+}
 
 @media only screen and (min-width: 600px) and (max-width: 900px) {
   #dmBox {
-    right: 60px;
+    left: 20px;
   }
   #dm #uuid #otherUser {
-    width: 15vw;
+    width: 14.8vw;
   }
 
   #dm #uuid #currUser {
-    width: 15vw;
+    width: 14.96vw;
   }
 }
 
@@ -197,12 +198,12 @@ body {
   }
 
   #submitText {
-    position: relative;
-    top: 80px;
+    position: absolute;
+    top: 80vh;
   }
 
   #submit {
     position: relative;
-    top: 80px;
+    bottom: 80vh;
   }
 }
