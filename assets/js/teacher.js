@@ -209,8 +209,12 @@ function createDivBox(name) {
   var divWidth = statusBox.offsetWidth;
 
   studentBox.style.width = divWidth;
-  studentBox.style.height = "2vw";
+
   studentBox.style.borderBottom = "1px solid black";
+
+  var x = window.matchMedia("(max-width: 600px)");
+  myFunction(x); // Call listener function at run time
+  x.addListener(myFunction); // Attach listener function on state changes
 
   studentBox.className = "studentBox";
 
@@ -232,6 +236,15 @@ function createDivBox(name) {
   statusBox.appendChild(document.createElement('br'));
   statusBox.appendChild(studentBox);
 
+}
+
+function myFunction(x) {
+  var studentBox = document.createElement('div');
+  if (x.matches) { // If media query matches
+    studentBox.style.height = "4vw";
+  } else {
+    studentBox.style.height = "2vw";
+  }
 }
 
 function removeEntry(nameToRemove) {
