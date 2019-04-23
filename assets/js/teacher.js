@@ -20,7 +20,12 @@ config: {
 room = user.join('trip-check');
 
 room.here().then((users) => {
+  users = JSON.parse(users);
   console.log((users));
+});
+
+room.history().then((history) => {
+  console.log(history);
 });
 
 // send message based on value in message box
@@ -36,10 +41,11 @@ function sendMessage() {
 // send automated message down to Student Services sending student down based on text box
 function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
+  var status;
 
   if(studentName != "") {
     room.message({message: "Hey, just sent down " + studentName});
-    firebase.database().ref('studentsOut').push(studentName);
+    firebase.database().ref('studentsOut').push(studentName + ";" + status);
   }
   $('#studentName').val("");
 
