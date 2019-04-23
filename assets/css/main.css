@@ -45,6 +45,10 @@ body {
   overflow: auto;
 }
 
+#dm #uuid {
+  z-index: 20;
+}
+
 #dm::-webkit-scrollbar { width: 0 !important }
 #dm {overflow: -moz-scrollbars-none; }
 #dm { -ms-overflow-style: none; }
