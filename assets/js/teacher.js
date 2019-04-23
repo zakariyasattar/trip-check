@@ -19,6 +19,10 @@ config: {
 // join room with Student Services rep
 room = user.join('trip-check');
 
+room.here().then((users) => {
+  console.log((users));
+});
+
 // send message based on value in message box
 function sendMessage() {
   var boxVal = document.getElementById('dmBox').value;

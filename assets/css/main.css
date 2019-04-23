@@ -101,7 +101,7 @@ body {
 
   background: white;
 
-  /* overflow: auto; */
+  overflow: auto;
 }
 
 @media only screen and (max-width: 600px) {
@@ -139,7 +139,9 @@ body {
   }
 
   #studentSelectBox {
-    width: 100vw;
+    width: 30vw;
+    position: relative;
+    bottom: 40px;
   }
 
   #dmBox {
