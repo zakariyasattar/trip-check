@@ -41,11 +41,10 @@ function sendMessage() {
 // send automated message down to Student Services sending student down based on text box
 function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
-  var status;
 
   if(studentName != "") {
     room.message({message: "Hey, just sent down " + studentName});
-    firebase.database().ref('studentsOut').push(studentName + ";" + status);
+    firebase.database().ref('studentsOut').push(studentName + ";false");
   }
   $('#studentName').val("");
 
@@ -198,12 +197,19 @@ function createDivBox(name) {
   statusCircle.className = "fas fa-circle";
   statusCircle.style.borderRadius = "100%";
 
-  if(true){
-    statusCircle.style.color = "#f2e341";
-  }
-  else {
-    statusCircle.style.color = "#4bd859";
-  }
+  firebase.database().ref('studentsOut').once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val() == name){
+        if(childSnapshot.val().substring(childSnapshot.val().indexOf(";") + 1) == "false") {
+          statusCircle.style.color = "#f2e341";
+        }
+        else {
+          statusCircle.style.color = "#4bd859";
+        }
+      }
+	   });
+	});
+
 
   var useTimes = document.createElement('a');
   useTimes.href = "javascript:removeEntry(\""  +name +"\")";
@@ -228,7 +234,7 @@ function createDivBox(name) {
 
   studentBox.className = "studentBox";
 
-  span.innerHTML = name;
+  span.innerHTML = name.substring(0, name.indexOf(';'));
   span.value = "name";
   span.style.paddingLeft = "20px";
 
