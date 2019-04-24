@@ -264,6 +264,8 @@ function myFunction(x) {
 }
 
 function removeEntry(nameToRemove) {
+  nameToRemove = nameToRemove.substring(0, nameToRemove.indexOf(';'));
+
   var boxes = document.getElementById('status').getElementsByClassName('studentBox');
   var finalString = "";
 
@@ -277,7 +279,7 @@ function removeEntry(nameToRemove) {
 
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.val() == nameToRemove) {
+      if(childSnapshot.val().substring(0, childSnapshot.val().indexOf(';')) == nameToRemove) {
         firebase.database().ref('studentsOut').child(childSnapshot.key).remove();
       }
 	  });
