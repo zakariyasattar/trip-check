@@ -152,13 +152,22 @@ body {
     width: 90vw;
     right: 15px;
   }
-
+  #introText{
+    position: relative;
+    right: 60vw;
+    overflow-wrap: break-word;
+  }
   #studentName {
     position: relative;
-    right: 20px;
+    right: 54.5vw;
+    top: -0vh;
 
-    bottom: 6vh;
   }
+  #submit {
+    position: relative;
+    left: -56vw;
+  }
+
 
   #status {
     width: 90vw;
@@ -220,4 +229,5 @@ body {
     position: relative;
     bottom: 80vh;
   }
+
 }
