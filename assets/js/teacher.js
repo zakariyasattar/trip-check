@@ -64,23 +64,17 @@ room.on('message', (uuid, data) => {
 // create message div for current user
 function createBoxForCurrUser(data, uuid) {
   var box = document.createElement('div');
+  box.id = "currUserMessageBox";
   var dm = document.getElementById("dm");
 
   var messageText = document.createElement('span');
+  messageText.id = "currUserMessageText";
+
   var info = document.createElement('span');
+  info.id = "currUserID";
 
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
-
-  box.style.background = "white";
-  box.style.borderRadius = "10px 10px 0 10px";
-
-  box.style.float = "right"
-  box.style.position = "relative";
-  box.style.right = "-108px";
-
-  box.style.wordWrap= "normal";
-  box.style.maxWidth = "20vw";
 
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -88,23 +82,7 @@ function createBoxForCurrUser(data, uuid) {
   var dateTime = date+' '+time;
 
   messageText.innerHTML = data.message;
-  messageText.style.width = "20vw";
-  messageText.style.wordWrap= "break-word";
-
   info.innerHTML = dateTime;
-
-  info.style.float = "right";
-  info.style.position = "relative";
-  info.style.bottom = "30px";
-  info.style.right = "15px";
-  info.style.color = "#a5a4a5";
-
-  messageText.style.paddingRight = "20px";
-  messageText.style.paddingLeft = "20px";
-  messageText.style.paddingTop = "20px";
-  messageText.style.paddingBottom = "20px";
-  messageText.style.width = "27vw";
-
 
   dm.appendChild(info);
   box.appendChild(messageText);
