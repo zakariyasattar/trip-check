@@ -153,19 +153,19 @@ body {
     right: 15px;
   }
   #introText{
+    content: "Hello";
     position: relative;
-    right: 60vw;
-    overflow-wrap: break-word;
+    right: 120vw;
   }
   #studentName {
     position: relative;
-    right: 54.5vw;
+    right: 59vw;
     top: -0vh;
 
   }
   #submit {
     position: relative;
-    left: -56vw;
+    left: -64vw;
   }
 
 
