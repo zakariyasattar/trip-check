@@ -42,7 +42,8 @@ body {
   max-width: 20vw;
 
   padding-left: 20px;
-
+  margin-bottom: 40px;
+  display: block;
 }
 
 #currUserMessageText {
@@ -203,7 +204,7 @@ body {
 
   }
   #submit {
-    position: relative;
+    position: inherit;
     left: -56vw;
   }
 

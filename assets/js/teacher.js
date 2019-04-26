@@ -74,12 +74,11 @@ function createBoxForCurrUser(data, uuid) {
   info.id = "currUserID";
 
   dm.appendChild(document.createElement('br'));
-  dm.appendChild(document.createElement('br'));
 
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var dateTime = date+' '+time;
+  var dateTime = date + ' ' + time;
 
   messageText.innerHTML = data.message;
   info.innerHTML = dateTime;
@@ -88,7 +87,6 @@ function createBoxForCurrUser(data, uuid) {
   box.appendChild(messageText);
   dm.appendChild(box);
 
-  dm.appendChild(document.createElement('br'));
 }
 
 
