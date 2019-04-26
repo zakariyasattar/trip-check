@@ -43,7 +43,7 @@ function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
 
   if(studentName != "") {
-    room.message({message: "Hey, just sent down " + studentName});
+    room.message({message: "Hey, just sent down <i>" + studentName + "</i>"});
     firebase.database().ref('studentsOut').push(studentName + ";false");
   }
   $('#studentName').val("");
@@ -87,6 +87,7 @@ function createBoxForCurrUser(data, uuid) {
   dm.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
+
   dm.appendChild(document.createElement('br'));
 }
 
