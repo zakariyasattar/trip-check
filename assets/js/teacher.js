@@ -7,7 +7,7 @@ function onSignIn(googleUser) {
   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
 
   var idDiv = document.getElementById('idDiv');
-  idDiv.innerHTML = JSON.parse(localStorage.getItem("userInfo")[1]);
+  idDiv.innerHTML = JSON.parse(localStorage.getItem("userInfo"))[1];
 
 }
 
