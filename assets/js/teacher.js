@@ -4,9 +4,11 @@ function onSignIn(googleUser) {
   window.location = "assets/html/teacher.html";
 
   var profile = googleUser.getBasicProfile();
+  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
 
-  localStorage.setItem("info", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-  console.log(JSON.parse(localStorage.getItem("info")));
+  var idDiv = document.getElementById('idDiv');
+  idDiv.innerHTML = JSON.parse(localStorage.getItem("userInfo")[1]);
+
 }
 
 function signOut() {
