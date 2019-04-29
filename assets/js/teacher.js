@@ -1,6 +1,7 @@
 
 // Google Sign-In
 function onSignIn(googleUser) {
+  window.location = "../html/teacher.html";
   var profile = googleUser.getBasicProfile();
 
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
