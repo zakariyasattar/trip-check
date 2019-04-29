@@ -6,7 +6,7 @@ function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
 
   localStorage.setItem("info", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-  console.log(JSON.parse(localStorage.getItem("names")));
+  console.log(JSON.parse(localStorage.getItem("info")));
 }
 
 function signOut() {
