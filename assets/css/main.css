@@ -193,18 +193,22 @@ body {
     right: 15px;
   }
   #introText{
-    content: "Hello";
     position: relative;
-    right: 120vw;
+    right: 60vw;
+    overflow-wrap: break-word;
   }
   #studentName {
     position: relative;
-    right: 59vw;
+    right: 54.5vw;
     top: -0vh;
 
   }
   #submit {
+<<<<<<< HEAD
     position: inherit;
+=======
+    position: relative;
+>>>>>>> parent of 3e8374f... t
     left: -56vw;
   }
 
