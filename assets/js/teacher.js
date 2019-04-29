@@ -3,15 +3,10 @@
 function onSignIn(googleUser) {
   window.location = "assets/html/teacher.html";
 
-  setTimeout(function(){
-    var profile = googleUser.getBasicProfile();
+  var profile = googleUser.getBasicProfile();
 
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    document.getElementById('idDiv').innerHTML = "logged in as " + profile.getName();
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-  }, 30);
-
+  localStorage.setItem("info", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+  console.log(JSON.parse(localStorage.getItem("names")));
 }
 
 function signOut() {
