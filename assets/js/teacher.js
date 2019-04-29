@@ -5,10 +5,6 @@ function onSignIn(googleUser) {
 
   var profile = googleUser.getBasicProfile();
   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-
-  var idDiv = document.getElementById('idDiv');
-  idDiv.innerHTML = JSON.parse(localStorage.getItem("userInfo"))[1];
-
 }
 
 function signOut() {
@@ -24,6 +20,9 @@ firebase.database().ref('studentsOut').on('value', function(snapshot) {
     refreshBoxes();
   });
 });
+
+var idDiv = document.getElementById('idDiv');
+idDiv.innerHTML = 'Logged in as ' + JSON.parse(localStorage.getItem("userInfo"))[1];
 
 
 // initiate user variable to send/receive messages
