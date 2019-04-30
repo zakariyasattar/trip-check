@@ -17,7 +17,13 @@
 
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <meta name="google-signin-client_id" content="884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com">
+
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+
     <script>
+      (function(){
+         emailjs.init("user_iTQtiDoKk2cyRD6JBDG9B");
+      })();
       // Initialize Firebase
       var config = {
         apiKey: "AIzaSyC70sMClZypAIqNEQohFPSP7Lz1Ayt0R7k",

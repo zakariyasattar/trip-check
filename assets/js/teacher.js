@@ -10,7 +10,7 @@ function onSignIn(googleUser) {
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
-    window.location = "../../index.html"
+    window.location = "../../index.html";
   });
 }
 
@@ -37,7 +37,7 @@ service: 'pubnub',
 config: {
     publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
     subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b',
-    uuid: 'test_user'
+    uuid: JSON.parse(localStorage.getItem("userInfo"))[1];
   }
 });
 
