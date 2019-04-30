@@ -8,15 +8,14 @@ function onSignIn(googleUser) {
 }
 
 function signOut() {
-  window.onLoadCallback = function(){
-    gapi.auth2.init({
-        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
+  function init() {
+    gapi.load('auth2', function() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        window.location = "/index.html";
       });
+    });
   }
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    window.location = "/index.html";
-  });
 }
 
 // Everytime there is a db update, refresh
