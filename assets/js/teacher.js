@@ -1,4 +1,3 @@
-JSON.parse(localStorage.getItem("userInfo"))[1]
 // Google Sign-In
 function onSignIn(googleUser) {
   window.location = "assets/html/teacher.html";
@@ -18,6 +17,11 @@ function onLoad() {
   gapi.load('auth2', function() {
     gapi.auth2.init();
   });
+}
+
+if(localStorage.getItem('userInfo') == null) {
+  document.getElementById('body').style.display = "none";
+  alert("NOT AUTHORIZED");
 }
 
 // Everytime there is a db update, refresh
@@ -118,48 +122,29 @@ function createBoxForCurrUser(data, uuid) {
 // create message div for receiving user
 function createBoxForOtherUser(data, uuid) {
   var box = document.createElement('div');
+  box.id = "otherUserMessageBox";
   var dm = document.getElementById("dm");
 
   var messageText = document.createElement('span');
+  messageText.id = "otherUserMessageText";
+
   var info = document.createElement('span');
+  info.id = "otherUserID";
 
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
-
-  box.style.background = "#3264fc";
-  box.style.color = "white";
-  box.style.borderRadius = "10px 10px 10px 0px";
-
-  box.style.wordWrap= "normal";
-  box.style.maxWidth = "20vw";
 
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date+' '+time;
 
-  messageText.innerHTML = data.message;
-  messageText.style.width = "20vw";
-  messageText.style.wordWrap= "break-word";
-
   info.innerHTML = dateTime;
-
-  info.style.float = "left";
-  info.style.position = "relative";
-  info.style.bottom = "30px";
-  info.style.left = "10px";
-  info.style.color = "#a5a4a5";
-
-  messageText.style.paddingRight = "20px";
-  messageText.style.paddingLeft = "20px";
-  messageText.style.paddingTop = "20px";
-  messageText.style.paddingBottom = "20px";
-
+  messageText.innerHTML = data.message;
 
   dm.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
-  dm.appendChild(document.createElement('br'));
 }
 
 
