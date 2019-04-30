@@ -24,6 +24,8 @@ if(localStorage.getItem('userInfo') == null) {
   alert("NOT AUTHORIZED");
 }
 
+var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
+
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
   snapshot.forEach(function(childSnapshot) {
@@ -32,7 +34,7 @@ firebase.database().ref('studentsOut').on('value', function(snapshot) {
 });
 
 var idDiv = document.getElementById('idDiv');
-idDiv.innerHTML = 'Logged in as ' + JSON.parse(localStorage.getItem("userInfo"))[1];
+idDiv.innerHTML = 'Logged in as ' + userName;
 
 
 // initiate user variable to send/receive messages
@@ -41,12 +43,12 @@ service: 'pubnub',
 config: {
     publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
     subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b',
-    uuid: (JSON.parse(localStorage.getItem("userInfo"))[1]) + ""
+    uuid: (userName) + ""
   }
 });
 
 // join room with Student Services rep
-room = user.join('trip-check');
+room = user.join((userName));
 
 room.here().then((users) => {
   users = JSON.parse(users);
@@ -54,7 +56,9 @@ room.here().then((users) => {
 });
 
 room.history().then((history) => {
-  console.log(history);
+  [...history].forEach(function (child) {
+    console.log(child)
+  });
 });
 
 // send message based on value in message box
@@ -82,7 +86,7 @@ function sendChildDown() {
 
 // check if room receives message and style based on who sent it
 room.on('message', (uuid, data) => {
-  if(uuid == JSON.parse(localStorage.getItem("userInfo"))[1]){
+  if(uuid == userName){
     createBoxForCurrUser(data, uuid);
   }
   else{
