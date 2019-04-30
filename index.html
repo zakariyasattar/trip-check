@@ -17,20 +17,14 @@
 	<body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
+    <script src="assets/js/teacher.js"></script>
     <script>
       var url = document.URL;
       if(url.substring(url.indexOf("?") + 1) == "signOut=true"){
         alert("hello");
         signOut();
       }
-
-      function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-        });
-      }
     </script>
-    <script src="assets/js/teacher.js"></script>
 	</body>
 
 </html>
