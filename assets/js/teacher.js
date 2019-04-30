@@ -13,6 +13,12 @@ function signOut() {
   });
 }
 
+function onLoad() {
+  gapi.load('auth2', function() {
+    gapi.auth2.init();
+  });
+}
+
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
   snapshot.forEach(function(childSnapshot) {
