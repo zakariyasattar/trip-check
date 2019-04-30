@@ -20,6 +20,16 @@ body {
   left:20px;
 }
 
+
+#signOut {
+  color: white;
+  float: left;
+
+  position:absolute;
+  top:30px;
+  left:20px;
+}
+
 #dmBox {
   position: absolute;
   bottom: 5vh;
