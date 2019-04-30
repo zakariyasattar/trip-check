@@ -29,7 +29,7 @@ body {
   position:absolute;
   top:45px;
   left:20px;
-  display: inline-block; 
+  display: inline-block;
 }
 
 #dmBox {
@@ -103,6 +103,7 @@ body {
 
   background: #eceff1;
   overflow: auto;
+  display: inline-block;
 }
 
 #dm #uuid {
