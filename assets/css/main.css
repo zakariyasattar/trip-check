@@ -18,6 +18,7 @@ body {
   position:absolute;
   top:20px;
   left:20px;
+  display: inline-block;
 }
 
 
@@ -28,6 +29,7 @@ body {
   position:absolute;
   top:45px;
   left:20px;
+  display: inline-block; 
 }
 
 #dmBox {
