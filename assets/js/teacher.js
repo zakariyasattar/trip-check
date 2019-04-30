@@ -11,6 +11,7 @@ function signOut() {
   function init() {
     gapi.load('auth2', function() {
       var auth2 = gapi.auth2.getAuthInstance();
+      alert(auth2);
       auth2.signOut().then(function () {
         alert("hello");
         window.location = "../../index.html";
