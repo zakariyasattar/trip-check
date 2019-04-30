@@ -9,14 +9,14 @@ function onSignIn(googleUser) {
 
 function signOut() {
 
+  window.onLoadCallback = function(){
   gapi.auth2.init({
-        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-    }).then(function (authInstance) {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        window.location = "/index.html";
-      });
+      client_id: 'filler_text_for_client_id.apps.googleusercontent.com'
     });
+  }
+  auth2.signOut().then(function () {
+    window.location = "/index.html";
+  });
 }
 
 // Everytime there is a db update, refresh
