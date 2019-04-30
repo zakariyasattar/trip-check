@@ -56,9 +56,8 @@ room.here().then((users) => {
 });
 
 room.history().then((history) => {
-  [...history].forEach(function (child) {
-    console.log(child)
-  });
+  var arr = Array.prototype.slice.call( history );
+  console.log(arr);
 });
 
 // send message based on value in message box
