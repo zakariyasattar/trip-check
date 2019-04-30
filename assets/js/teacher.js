@@ -7,17 +7,9 @@ function onSignIn(googleUser) {
   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
 }
 
-function init() {
-  gapi.load('auth2', function() {
-    alert(gapi);
-  });
-}
-
 function signOut() {
-  init();
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
-    window.location = "../../index.html";
   });
 }
 
