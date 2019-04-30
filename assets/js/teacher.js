@@ -1,8 +1,4 @@
-window.onLoadCallback = function(){
-  gapi.auth2.init({
-      client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-    });
-}
+
 // Google Sign-In
 function onSignIn(googleUser) {
   window.location = "assets/html/teacher.html";
@@ -12,6 +8,11 @@ function onSignIn(googleUser) {
 }
 
 function signOut() {
+  window.onLoadCallback = function(){
+    gapi.auth2.init({
+        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
+      });
+  }
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     window.location = "/index.html";
