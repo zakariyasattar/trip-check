@@ -1,4 +1,4 @@
-
+JSON.parse(localStorage.getItem("userInfo"))[1]
 // Google Sign-In
 function onSignIn(googleUser) {
   window.location = "assets/html/teacher.html";
@@ -78,7 +78,7 @@ function sendChildDown() {
 
 // check if room receives message and style based on who sent it
 room.on('message', (uuid, data) => {
-  if(uuid == 'test_user'){
+  if(uuid == JSON.parse(localStorage.getItem("userInfo"))[1]){
     createBoxForCurrUser(data, uuid);
   }
   else{
