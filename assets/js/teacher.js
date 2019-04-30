@@ -7,17 +7,18 @@ function onSignIn(googleUser) {
   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
 }
 
+function init() {
+  gapi.load('auth2', function() {
+    alert(gapi);
+  });
+}
+
 function signOut() {
-  function init() {
-    gapi.load('auth2', function() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      alert(auth2);
-      auth2.signOut().then(function () {
-        alert("hello");
-        window.location = "../../index.html";
-      });
-    });
-  }
+  init();
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    window.location = "../../index.html";
+  });
 }
 
 // Everytime there is a db update, refresh
