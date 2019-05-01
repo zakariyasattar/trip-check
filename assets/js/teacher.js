@@ -51,14 +51,13 @@ config: {
 room = user.join((userName));
 
 room.here().then((users) => {
-  users = JSON.parse(users);
-  console.log((users));
-});
-
-room.history().then((history) => {
-  var arr = Array.prototype.slice.call( history );
+  var arr = Array.prototype.slice.call( users );
   console.log(arr);
 });
+// 
+// room.history().then((history) => {
+//
+// });
 
 // send message based on value in message box
 function sendMessage() {
