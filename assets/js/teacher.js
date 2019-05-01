@@ -1,4 +1,3 @@
-
 // Google Sign-In
 function onSignIn(googleUser) {
   window.location = "assets/html/teacher.html";
@@ -7,19 +6,25 @@ function onSignIn(googleUser) {
   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
 }
 
-function init() {
-  gapi.load('auth2', function() {
-    alert(gapi);
-  });
-}
-
 function signOut() {
-  init();
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     window.location = "../../index.html";
   });
 }
+
+function onLoad() {
+  gapi.load('auth2', function() {
+    gapi.auth2.init();
+  });
+}
+
+if(localStorage.getItem('userInfo') == null) {
+  document.getElementById('body').style.display = "none";
+  alert("NOT AUTHORIZED");
+}
+
+var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
@@ -29,7 +34,7 @@ firebase.database().ref('studentsOut').on('value', function(snapshot) {
 });
 
 var idDiv = document.getElementById('idDiv');
-idDiv.innerHTML = 'Logged in as ' + JSON.parse(localStorage.getItem("userInfo"))[1];
+idDiv.innerHTML = 'Logged in as ' + userName;
 
 
 // initiate user variable to send/receive messages
@@ -38,21 +43,21 @@ service: 'pubnub',
 config: {
     publishKey: 'pub-c-0dda1bca-3013-459f-8333-32b487e74ab4',
     subscribeKey: 'sub-c-f43f4c62-5c6c-11e9-af7f-e675e2b0822b',
-    uuid: 'test_user'
+    uuid: (userName) + ""
   }
 });
 
 // join room with Student Services rep
-room = user.join('trip-check');
+room = user.join((userName));
 
 room.here().then((users) => {
-  users = JSON.parse(users);
-  console.log((users));
+  var arr = Array.prototype.slice.call( users );
+  console.log(arr);
 });
-
-room.history().then((history) => {
-  console.log(history);
-});
+//
+// room.history().then((history) => {
+//
+// });
 
 // send message based on value in message box
 function sendMessage() {
@@ -79,7 +84,7 @@ function sendChildDown() {
 
 // check if room receives message and style based on who sent it
 room.on('message', (uuid, data) => {
-  if(uuid == 'test_user'){
+  if(uuid == userName){
     createBoxForCurrUser(data, uuid);
   }
   else{
@@ -119,48 +124,29 @@ function createBoxForCurrUser(data, uuid) {
 // create message div for receiving user
 function createBoxForOtherUser(data, uuid) {
   var box = document.createElement('div');
+  box.id = "otherUserMessageBox";
   var dm = document.getElementById("dm");
 
   var messageText = document.createElement('span');
+  messageText.id = "otherUserMessageText";
+
   var info = document.createElement('span');
+  info.id = "otherUserID";
 
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
-
-  box.style.background = "#3264fc";
-  box.style.color = "white";
-  box.style.borderRadius = "10px 10px 10px 0px";
-
-  box.style.wordWrap= "normal";
-  box.style.maxWidth = "20vw";
 
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date+' '+time;
 
-  messageText.innerHTML = data.message;
-  messageText.style.width = "20vw";
-  messageText.style.wordWrap= "break-word";
-
   info.innerHTML = dateTime;
-
-  info.style.float = "left";
-  info.style.position = "relative";
-  info.style.bottom = "30px";
-  info.style.left = "10px";
-  info.style.color = "#a5a4a5";
-
-  messageText.style.paddingRight = "20px";
-  messageText.style.paddingLeft = "20px";
-  messageText.style.paddingTop = "20px";
-  messageText.style.paddingBottom = "20px";
-
+  messageText.innerHTML = data.message;
 
   dm.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
-  dm.appendChild(document.createElement('br'));
 }
 
 
