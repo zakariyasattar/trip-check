@@ -56,7 +56,7 @@ room = user.join((userName));
 // });
 
 room.history().then((history) => {
-  console.log(history);
+  console.log(history.uuid, history.length);
 });
 
 
