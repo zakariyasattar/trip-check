@@ -50,14 +50,15 @@ config: {
 // join room with Student Services rep
 room = user.join((userName));
 
-room.here().then((users) => {
-  var arr = Array.prototype.slice.call( users );
-  console.log(arr);
-});
+// room.here().then((users) => {
+//   var arr = Array.prototype.slice.call( users );
+//   console.log(arr);
+// });
 
 room.history().then((history) => {
   console.log(history);
 });
+
 
 // send message based on value in message box
 function sendMessage() {
