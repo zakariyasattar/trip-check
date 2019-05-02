@@ -58,13 +58,7 @@ room = user.join((userName));
 
 room.history().then((history) => {
   for(var h = 0; h < history.length; h++) {
-    if(history[h] == userName){
-      console.log(history[h].data.message);
-      createBoxForCurrUser(history[h].data.message)
-    }
-    else {
-      createBoxForOtherUser(history[h].data.message);
-    }
+    console.log(history[h].data.message);
   }
 });
 
