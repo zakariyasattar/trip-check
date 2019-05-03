@@ -49,7 +49,7 @@ config: {
 });
 
 // join room with Student Services rep
-room = user.join(("testing-a"));
+room = user.join("testing-c");
 
 // room.here().then((users) => {
 //   var arr = Array.prototype.slice.call( users );
@@ -58,14 +58,9 @@ room = user.join(("testing-a"));
 
 // based on hisory of the current chat room, populate data boxes with messages
 room.history().then((history) => {
-  for(var h = history.length - 1; h > 0 ; h--) {
+  for(var h = history.length - 1; h >= 0; h--) {
     var data = history[h].data.message;
-
-    var dateTime = data.substring(data.indexOf(";") + 1);
-    data = data.substring(0, data.indexOf(";"))
-    console.log(dateTime, data);
-
-    createBoxForCurrUser(data, false, dateTime);
+    createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
   }
 });
 
@@ -75,15 +70,21 @@ function sendMessage() {
   var boxVal = document.getElementById('dmBox').value;
 
   if(boxVal != "") {
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
 
-    room.message({message: boxVal + ";" + dateTime});
+    room.message({message: boxVal + ";" + new Date().toISOString().substr(0, 19).replace('T', ' ')});
     $('#dmBox').val("");
   }
 }
+
+// check if room receives message and style based on who sent it
+room.on('message', (uuid, data) => {
+  if(uuid == userName){
+    createBoxForCurrUser(data, true);
+  }
+  else{
+    createBoxForOtherUser(data, true);
+  }
+});
 
 // send automated message down to Student Services sending student down based on text box
 function sendChildDown() {
@@ -97,16 +98,6 @@ function sendChildDown() {
 
   refreshBoxes();
 }
-
-// check if room receives message and style based on who sent it
-room.on('message', (uuid, data) => {
-  if(uuid == userName){
-    createBoxForCurrUser(data, true);
-  }
-  else{
-    createBoxForOtherUser(data, true);
-  }
-});
 
 // create message div for current user
 function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
@@ -123,22 +114,20 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
   dm.appendChild(document.createElement('br'));
 
   if(currentSessionCall) {
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
 
     messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-    info.innerHTML = dateTime;
+    info.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');;
   }
   else {
-    messageText.innerHTML = data.message;
+    messageText.innerHTML = data;
     info.innerHTML = timeStamp;
   }
 
   dm.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
+  dm.appendChild(document.createElement('br'));
+  dm.appendChild(document.createElement('br'));
 
 }
 
@@ -159,13 +148,9 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
   dm.appendChild(document.createElement('br'));
 
   if(currentSessionCall) {
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
 
     messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-    info.innerHTML = dateTime;
+    info.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
   }
   else {
     messageText.innerHTML = data.message;
