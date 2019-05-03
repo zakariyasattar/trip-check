@@ -25,7 +25,8 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-var userName = "zak";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Sohaib";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
+
 
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
@@ -99,6 +100,17 @@ function sendChildDown() {
   refreshBoxes();
 }
 
+// check if room receives message and style based on who sent it
+room.on('message', (uuid, data) => {
+  if(uuid == userName){
+    createBoxForCurrUser(data, true);
+  }
+  else{
+    createBoxForOtherUser(data, true);
+  }
+});
+
+
 // create message div for current user
 function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
   var box = document.createElement('div');
@@ -107,7 +119,6 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
 
   var messageText = document.createElement('span');
   messageText.id = "currUserMessageText";
-
   var info = document.createElement('span');
   info.id = "currUserID";
 
@@ -123,13 +134,29 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
     info.innerHTML = timeStamp;
   }
 
+
+
   dm.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
 
+ $("#dm").animate({ scrollTop: 20000000 }, "slow");
+
+//  $(document).ready(function(){
+// $('messageText').one('change', function(e){
+//     $("dm").animate({ scrollTop: $("dm").height()}, "slow");
+// });
+// });
+
+  dm.appendChild(document.createElement('br'));
+  dm.appendChild(document.createElement('br'));
+  dm.appendChild(document.createElement('br'));
+
+
 }
+
 
 
 // create message div for receiving user
