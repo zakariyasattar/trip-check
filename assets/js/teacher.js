@@ -1,34 +1,34 @@
-// Google Sign-In
-function onSignIn(googleUser) {
-  window.location = "assets/html/teacher.html";
+// // Google Sign-In
+// function onSignIn(googleUser) {
+//   window.location = "assets/html/teacher.html";
+//
+//   var profile = googleUser.getBasicProfile();
+//   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+// }
+//
+// function signOut() {
+//   var auth2 = gapi.auth2.getAuthInstance();
+//   auth2.signOut().then(function () {
+//     window.location = "../../index.html";
+//   });
+// }
+//
+// gapi.load('auth2', initSigninV2);
+//
+// function initSigninV2() {
+//     gapi.auth2.init({
+//         client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
+//     }).then(function (authInstance) {
+//         alert("init");
+//     });
+// }
+//
+// if(localStorage.getItem('userInfo') == null) {
+//   document.getElementById('body').style.display = "none";
+//   alert("NOT AUTHORIZED");
+// }
 
-  var profile = googleUser.getBasicProfile();
-  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-}
-
-function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    window.location = "../../index.html";
-  });
-}
-
-gapi.load('auth2', initSigninV2);
-
-function initSigninV2() {
-    gapi.auth2.init({
-        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-    }).then(function (authInstance) {
-        alert("init");
-    });
-}
-
-if(localStorage.getItem('userInfo') == null) {
-  document.getElementById('body').style.display = "none";
-  alert("NOT AUTHORIZED");
-}
-
-var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Sohaib";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -58,8 +58,8 @@ config: {
   }
 });
 
-  // join room with Student Services rep
-  room = user.join("testing-d");
+// join room with Student Services rep
+room = user.join("testing-d");
 
 
 // room.here().then((users) => {
@@ -71,7 +71,12 @@ config: {
 room.history().then((history) => {
   for(var h = history.length - 1; h >= 0; h--) {
     var data = history[h].data.message;
-    createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+    if(history[h].uuid == userName) {
+      createBoxForOtherUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+    }
+    else{
+      createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+    }
   }
 });
 
@@ -164,24 +169,26 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
   info.id = "otherUserID";
   info.className = "messageInfo";
 
-  dm.appendChild(document.createElement('br'));
-  dm.appendChild(document.createElement('br'));
-
   if(currentSessionCall) {
-
-    messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-    info.innerHTML = moment().format("hh:mm:ss A");;
+    if(data.message.indexOf(';') == -1){
+      messageText.innerHTML = data.message;
+    }
+    else{
+      messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
+      console.log(messageText.innerHTML);
+    }
+    info.innerHTML = moment().format("hh:mm:ss A");
   }
   else {
-    messageText.innerHTML = data.message;
+    messageText.innerHTML = data;
     info.innerHTML = timeStamp;
   }
 
   box.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
+  dm.appendChild(document.createElement('br'));
 }
-
 
 // listen for 'enter' keypress to send message
 $(document).keypress(function(e) {
@@ -190,7 +197,7 @@ $(document).keypress(function(e) {
     }
 });
 
-// style div on top of DMBOX according to uuids]
+// style div on top of DMBOX according to uuids
 if(file == "teacher.html") {
   var uuidDivCurrUser = document.getElementById('currUser');
   uuidDivCurrUser.innerHTML = userName;
