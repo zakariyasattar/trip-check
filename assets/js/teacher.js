@@ -257,8 +257,8 @@ function createSendBox(name) {
             createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
           }
         });
-        };
-      })();
+      };
+    })();
     studentBox.style.cursor = "pointer";
   }
 
@@ -292,11 +292,14 @@ function createSendBox(name) {
 
     accept.className = "fas fa-check";
     accept.href = "javascript:accept(\"" + splitString[0] + "\")";
+
     accept.style.marginRight = "40px";
     accept.style.color = "green";
     accept.style.fontSize = "20px";
 
     reject.className = "fas fa-times";
+    reject.href = "javascript:reject(\"" + splitString[0] + "\")";
+
     reject.style.color = "red";
     reject.style.fontSize = "20px";
 
@@ -314,6 +317,7 @@ function createSendBox(name) {
   statusBox.appendChild(studentBox);
 }
 
+// set corresponding db option to true
 function accept(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
@@ -323,6 +327,18 @@ function accept(name) {
       }
 	  });
 	});
+}
+
+// remove corresponding db option
+function reject(name) {
+  firebase.database().ref('studentsOut').once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val().substring(0, childSnapshot.val().indexOf(';')) == name) {
+        firebase.database().ref('studentsOut').child(childSnapshot.key).remove();
+      }
+	  });
+	});
+  refreshBoxes();
 }
 
 function clearAllBoxes() {

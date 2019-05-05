@@ -143,6 +143,13 @@ body {
 #dm {overflow: -moz-scrollbars-none; }
 #dm { -ms-overflow-style: none; }
 
+#smiley {
+  color: #dea4ed;
+  font-size: 200px;
+  position: relative;
+  top: 5vw;
+}
+
 #dmBottom {
   border-left: 1px solid black;
   width: 30vw;
