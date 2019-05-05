@@ -123,8 +123,6 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
   info.id = "currUserID";
   info.className = "messageInfo";
 
-  dm.appendChild(document.createElement('br'));
-
   if(currentSessionCall) {
     if(data.message.indexOf(';') == -1){
       messageText.innerHTML = data.message;
@@ -140,10 +138,9 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
     info.innerHTML = timeStamp;
   }
 
-  dm.appendChild(info);
+  box.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
-  dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
 
 }
@@ -181,7 +178,7 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
     info.innerHTML = timeStamp;
   }
 
-  dm.appendChild(info);
+  box.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
 }
