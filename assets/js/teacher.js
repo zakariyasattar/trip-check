@@ -27,6 +27,13 @@
 
 var userName = "Sohaib";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
+var url = document.URL;
+var parts = url.split("/");
+var file = parts[parts.length - 1];
+
+if(file.indexOf("#") != -1) {
+  file = file.substring(0, file.indexOf("#"));
+}
 
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
@@ -38,7 +45,6 @@ firebase.database().ref('studentsOut').on('value', function(snapshot) {
 var idDiv = document.getElementById('idDiv');
 idDiv.innerHTML = 'Logged in as ' + userName;
 
-
 // initiate user variable to send/receive messages
 let user = rltm({
 service: 'pubnub',
@@ -49,8 +55,9 @@ config: {
   }
 });
 
-// join room with Student Services rep
-room = user.join("testing-c");
+  // join room with Student Services rep
+  room = user.join("testing-c");
+
 
 // room.here().then((users) => {
 //   var arr = Array.prototype.slice.call( users );
@@ -100,27 +107,19 @@ function sendChildDown() {
   refreshBoxes();
 }
 
-// check if room receives message and style based on who sent it
-room.on('message', (uuid, data) => {
-  if(uuid == userName){
-    createBoxForCurrUser(data, true);
-  }
-  else{
-    createBoxForOtherUser(data, true);
-  }
-});
-
-
 // create message div for current user
 function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
   var box = document.createElement('div');
+  box.className = "messageBox";
   box.id = "currUserMessageBox";
   var dm = document.getElementById("dm");
 
   var messageText = document.createElement('span');
   messageText.id = "currUserMessageText";
+
   var info = document.createElement('span');
   info.id = "currUserID";
+  info.className = "messageInfo";
 
   dm.appendChild(document.createElement('br'));
 
@@ -134,15 +133,13 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
     info.innerHTML = timeStamp;
   }
 
-
-
   dm.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
 
- $("#dm").animate({ scrollTop: 20000000 }, "slow");
+}
 
 //  $(document).ready(function(){
 // $('messageText').one('change', function(e){
@@ -150,18 +147,10 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
 // });
 // });
 
-  dm.appendChild(document.createElement('br'));
-  dm.appendChild(document.createElement('br'));
-  dm.appendChild(document.createElement('br'));
-
-
-}
-
-
-
 // create message div for receiving user
 function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
   var box = document.createElement('div');
+  box.className = "messageBox";
   box.id = "otherUserMessageBox";
   var dm = document.getElementById("dm");
 
@@ -170,6 +159,7 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
 
   var info = document.createElement('span');
   info.id = "otherUserID";
+  info.className = "messageInfo";
 
   dm.appendChild(document.createElement('br'));
   dm.appendChild(document.createElement('br'));
@@ -197,10 +187,11 @@ $(document).keypress(function(e) {
     }
 });
 
-// style div on top of DMBOX according to uuids
-var uuidDivCurrUser = document.getElementById('currUser');
-
-uuidDivCurrUser.innerHTML = userName;
+// style div on top of DMBOX according to uuids]
+if(file == "teacher.html") {
+  var uuidDivCurrUser = document.getElementById('currUser');
+  uuidDivCurrUser.innerHTML = userName;
+}
 
 //create boxes based on who teachers send out
 function refreshBoxes() {
@@ -243,6 +234,27 @@ function createSendBox(name) {
   useTimes.style.marginLeft = "40px";
 
   var studentBox = document.createElement('div');
+
+  if(file == "studentServices.html") {
+    (function() {
+      studentBox.onclick = function() {
+        clearAllBoxes();
+        room = user.join(splitString[2]);
+
+        var uuidDivCurrUser = document.getElementById('otherUser');
+        uuidDivCurrUser.innerHTML = splitString[2];
+
+        room.history().then((history) => {
+          for(var h = history.length - 1; h >= 0; h--) {
+            var data = history[h].data.message;
+            createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+          }
+        });
+        };
+      })();
+    studentBox.style.cursor = "pointer";
+  }
+
   var divWidth = statusBox.offsetWidth;
 
   studentBox.style.width = divWidth;
@@ -258,20 +270,62 @@ function createSendBox(name) {
   span.value = "name";
   span.style.paddingLeft = "20px";
 
-  status.innerHTML = "Status: ";
+  if(file == "teacher.html") {
+    status.innerHTML = "Status: ";
 
-  status.appendChild(statusCircle);
-  status.appendChild(useTimes);
+    status.appendChild(statusCircle);
+    status.appendChild(useTimes);
 
-  status.style.float = "right";
-  status.style.paddingRight = "20px";
+    status.style.float = "right";
+    status.style.paddingRight = "20px";
+  }
+  else {
+    var accept = document.createElement('a');
+    var reject = document.createElement('a');
+
+    accept.className = "fas fa-check";
+    accept.href = "javascript:accept(\"" + splitString[0] + "\")";
+    accept.style.marginRight = "40px";
+    accept.style.color = "green";
+    accept.style.fontSize = "20px";
+
+    reject.className = "fas fa-times";
+    reject.style.color = "red";
+    reject.style.fontSize = "20px";
+
+    status.appendChild(accept);
+    status.appendChild(reject);
+
+    status.style.float = "right";
+    status.style.paddingRight = "90px";
+  }
 
   studentBox.appendChild(span);
   studentBox.appendChild(status);
 
   statusBox.appendChild(document.createElement('br'));
   statusBox.appendChild(studentBox);
+}
 
+function accept(name) {
+  firebase.database().ref('studentsOut').once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+      if(name == childSnapshot.val().split(";")[0]) {
+        console.log(childSnapshot.key);
+        firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";true;" + childSnapshot.val().split(";")[2]);
+      }
+	  });
+	});
+}
+
+function clearAllBoxes() {
+  var boxes = document.getElementsByClassName("messageBox");
+  var timeStamps = document.getElementsByClassName("messageInfo");
+
+  for(var i = 0; i < boxes.length; i++) {
+    boxes[i].style.display = "none";
+    timeStamps[i].style.display = "none";
+  }
 }
 
 function myFunction(x) {

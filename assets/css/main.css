@@ -153,9 +153,11 @@ body {
 
   background: #eceff1;
 }
+
 #dm #uuid{
   position:absolute;
 }
+
 #dm #uuid #otherUser {
   background: #3264fc;
 
@@ -209,12 +211,15 @@ body {
     border: none;
   }
 
+  currUserMessageBox {
+    max-width: 100vw;
+  }
+
   #dmBottom {
     width: 100vw;
     top: 175vh;
     left: -1vw;
     position: relative;
-
   }
 
   #coolHeader {
@@ -318,5 +323,4 @@ body {
     position: relative;
     bottom: 80vh;
   }
-
 }
