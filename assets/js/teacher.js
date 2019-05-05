@@ -58,8 +58,8 @@ config: {
   }
 });
 
-// join room with Student Services rep
-room = user.join("testing-d");
+  // join room with Student Services rep
+  room = user.join("testing-d");
 
 
 // room.here().then((users) => {
@@ -71,12 +71,7 @@ room = user.join("testing-d");
 room.history().then((history) => {
   for(var h = history.length - 1; h >= 0; h--) {
     var data = history[h].data.message;
-    if(history[h].uuid == userName) {
-      createBoxForOtherUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
-    }
-    else{
-      createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
-    }
+    createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
   }
 });
 
@@ -169,26 +164,24 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
   info.id = "otherUserID";
   info.className = "messageInfo";
 
+  dm.appendChild(document.createElement('br'));
+  dm.appendChild(document.createElement('br'));
+
   if(currentSessionCall) {
-    if(data.message.indexOf(';') == -1){
-      messageText.innerHTML = data.message;
-    }
-    else{
-      messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-      console.log(messageText.innerHTML);
-    }
-    info.innerHTML = moment().format("hh:mm:ss A");
+
+    messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
+    info.innerHTML = moment().format("hh:mm:ss A");;
   }
   else {
-    messageText.innerHTML = data;
+    messageText.innerHTML = data.message;
     info.innerHTML = timeStamp;
   }
 
   box.appendChild(info);
   box.appendChild(messageText);
   dm.appendChild(box);
-  dm.appendChild(document.createElement('br'));
 }
+
 
 // listen for 'enter' keypress to send message
 $(document).keypress(function(e) {
@@ -197,7 +190,7 @@ $(document).keypress(function(e) {
     }
 });
 
-// style div on top of DMBOX according to uuids
+// style div on top of DMBOX according to uuids]
 if(file == "teacher.html") {
   var uuidDivCurrUser = document.getElementById('currUser');
   uuidDivCurrUser.innerHTML = userName;
