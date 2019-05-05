@@ -1,29 +1,29 @@
-// // Google Sign-In
-// function onSignIn(googleUser) {
-//   window.location = "assets/html/teacher.html";
-//
-//   var profile = googleUser.getBasicProfile();
-//   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-// }
-//
-// function signOut() {
-//   onLoad();
-//   var auth2 = gapi.auth2.getAuthInstance();
-//   auth2.signOut().then(function () {
-//     window.location = "../../index.html";
-//   });
-// }
-//
-// function onLoad() {
-//   gapi.load('auth2', function() {
-//     gapi.auth2.init();
-//   });
-// }
-//
-// if(localStorage.getItem('userInfo') == null) {
-//   document.getElementById('body').style.display = "none";
-//   alert("NOT AUTHORIZED");
-// }
+// Google Sign-In
+function onSignIn(googleUser) {
+  window.location = "assets/html/teacher.html";
+
+  var profile = googleUser.getBasicProfile();
+  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+}
+
+function signOut() {
+  onLoad();
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    window.location = "../../index.html";
+  });
+}
+
+function onLoad() {
+  gapi.load('auth2', function() {
+    gapi.auth2.init();
+  });
+}
+
+if(localStorage.getItem('userInfo') == null) {
+  document.getElementById('body').style.display = "none";
+  alert("NOT AUTHORIZED");
+}
 
 var userName = "Sohaib";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
