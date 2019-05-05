@@ -21,7 +21,6 @@ body {
   display: inline-block;
 }
 
-
 #signOut {
   color: white;
   float: left;
@@ -33,11 +32,7 @@ body {
 }
 
 #dmBox {
-  position: absolute;
-  bottom: 5vh;
-  right: 33px;
-
-  float: right;
+  position: relative;
 
   width: 25vw;
   height: 5vh;
@@ -126,12 +121,9 @@ body {
   overflow: auto;
   display: inline-block;
 
-  padding-right: 10px;
+  padding: 20px;
 }
 
- #uuid {
-  z-index: 20;
-}
 
 #dm::-webkit-scrollbar { width: 0 !important }
 #dm {overflow: -moz-scrollbars-none; }
@@ -147,11 +139,11 @@ body {
 #dmBottom {
   border-left: 1px solid black;
   width: 30vw;
-  height: 12vh;
+  height: 8vh;
 
-  position: relative;
-  top: 88vh;
-  left: 70vw;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 
   background: #eceff1;
 }
