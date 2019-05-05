@@ -1,32 +1,32 @@
-// Google Sign-In
-function onSignIn(googleUser) {
-  window.location = "assets/html/teacher.html";
-
-  var profile = googleUser.getBasicProfile();
-  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-}
-
-function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    window.location = "../../index.html";
-  });
-}
-
-gapi.load('auth2', initSigninV2);
-
-function initSigninV2() {
-    gapi.auth2.init({
-        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-    }).then(function (authInstance) {
-        alert("init");
-    });
-}
-
-if(localStorage.getItem('userInfo') == null) {
-  document.getElementById('body').style.display = "none";
-  alert("NOT AUTHORIZED");
-}
+// // Google Sign-In
+// function onSignIn(googleUser) {
+//   window.location = "assets/html/teacher.html";
+//
+//   var profile = googleUser.getBasicProfile();
+//   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+// }
+//
+// function signOut() {
+//   var auth2 = gapi.auth2.getAuthInstance();
+//   auth2.signOut().then(function () {
+//     window.location = "../../index.html";
+//   });
+// }
+//
+// gapi.load('auth2', initSigninV2);
+//
+// function initSigninV2() {
+//     gapi.auth2.init({
+//         client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
+//     }).then(function (authInstance) {
+//         alert("init");
+//     });
+// }
+//
+// if(localStorage.getItem('userInfo') == null) {
+//   document.getElementById('body').style.display = "none";
+//   alert("NOT AUTHORIZED");
+// }
 
 var userName = "Sohaib";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
@@ -59,7 +59,7 @@ config: {
 });
 
   // join room with Student Services rep
-  room = user.join("testing-c");
+  room = user.join("testing-d");
 
 
 // room.here().then((users) => {
@@ -82,7 +82,7 @@ function sendMessage() {
 
   if(boxVal != "") {
 
-    room.message({message: boxVal + ";" + new Date().toISOString().substr(0, 19).replace('T', ' ')});
+    room.message({message: boxVal + ";" + moment().format("hh:mm:ss A")});
     $('#dmBox').val("");
   }
 }
@@ -102,11 +102,10 @@ function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
 
   if(studentName != "") {
-    room.message({message: "Hey, just sent down <i>" + studentName + "</i>"});
+    room.message({message: "Hey, just sent down " + studentName + ";" + moment().format("hh:mm:ss A")});
     firebase.database().ref('studentsOut').push(studentName + ";false;" + userName);
   }
   $('#studentName').val("");
-
   refreshBoxes();
 }
 
@@ -127,9 +126,14 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
   dm.appendChild(document.createElement('br'));
 
   if(currentSessionCall) {
-
-    messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-    info.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');;
+    if(data.message.indexOf(';') == -1){
+      messageText.innerHTML = data.message;
+    }
+    else{
+      messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
+      console.log(messageText.innerHTML);
+    }
+    info.innerHTML = moment().format("hh:mm:ss A");
   }
   else {
     messageText.innerHTML = data;
@@ -170,7 +174,7 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
   if(currentSessionCall) {
 
     messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-    info.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
+    info.innerHTML = moment().format("hh:mm:ss A");;
   }
   else {
     messageText.innerHTML = data.message;
