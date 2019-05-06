@@ -26,7 +26,7 @@ body {
   float: right;
 
   position:absolute;
-  top:60px;
+  top:40px;
   left:20px;
   display: inline-block;
 }
@@ -178,27 +178,6 @@ body {
   overflow: auto;
 }
 
-.outer {
-  display: table;
-  position: absolute;
-  right: 18vw;
-  bottom: 10vh;
-
-  height: 100%;
-  width: 100%;
-}
-
-.middle {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100vw;
-}
-
-.inner {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70vw;
-}
 
 @media only screen and (max-width: 600px) {
   body {
