@@ -13,14 +13,10 @@ function signOut() {
   });
 }
 
-gapi.load('auth2', initSigninV2);
-
-function initSigninV2() {
-    gapi.auth2.init({
-        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-    }).then(function (authInstance) {
-        alert("init");
-    });
+function onLoad() {
+  gapi.load('auth2', function() {
+    gapi.auth2.init();
+  });
 }
 
 if(localStorage.getItem('userInfo') == null) {
