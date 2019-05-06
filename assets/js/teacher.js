@@ -72,10 +72,10 @@ room.history().then((history) => {
   for(var h = history.length - 1; h >= 0; h--) {
     var data = history[h].data.message;
     if(history[h].uuid == userName) {
-      createBoxForOtherUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+      createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
     }
     else{
-      createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+      createBoxForOtherUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
     }
   }
 });
