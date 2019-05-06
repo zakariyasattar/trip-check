@@ -28,7 +28,7 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-var userName = "Sohaib";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Zak";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -59,7 +59,7 @@ config: {
 });
 
 // join room with Student Services rep
-room = user.join("testing-d");
+room = user.join("Sohaib");
 
 
 // room.here().then((users) => {
@@ -148,12 +148,9 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
   dm.appendChild(box);
   dm.appendChild(document.createElement('br'));
 
+  // auto scroll to bottom after message sent
+  $(dm).scrollTop($(dm)[0].scrollHeight);
 }
-
-$('messageText').one('change', function(e){
-    $("dm").animate({ scrollTop: $("dm").height()}, "slow");
-});
-
 
 // create message div for receiving user
 function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
@@ -188,6 +185,9 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
   box.appendChild(messageText);
   dm.appendChild(box);
   dm.appendChild(document.createElement('br'));
+
+  // auto scroll to bottom after message sent
+  $(dm).scrollTop($(dm)[0].scrollHeight);
 }
 
 // listen for 'enter' keypress to send message
@@ -245,7 +245,7 @@ function createSendBox(name) {
 
   var studentBox = document.createElement('div');
 
-  if(file == "studentServices.html") {
+  if(file != "teacher.html") {
     (function() {
       studentBox.onclick = function() {
         clearAllBoxes();
@@ -346,12 +346,19 @@ function reject(name) {
 
 function clearAllBoxes() {
   var boxes = document.getElementsByClassName("messageBox");
+<<<<<<< HEAD
   var timeStamps = document.getElementsByClassName("messageInfo");
   
   while(boxes.length > 0) {
     var elem = document.getElementById("currUserMessageBox");
     elem.remove();
     $('br').remove();
+=======
+  var dm = document.getElementById('dm');
+
+  for(var i = 0; i < boxes.length; i++) {
+    boxes[i].dm.removeChild(boxes[i]);
+>>>>>>> 2310bb4b631fd6f1baf11d3c054770ea31a032d2
   }
 }
 

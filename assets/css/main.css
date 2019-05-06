@@ -53,7 +53,7 @@ body {
 
   padding: 10px;
   border: 2px solid #2e2f7d;
-  margin-left: 15vw;
+  margin-left: 9vw;
 }
 
 #currUserMessageText {
@@ -74,7 +74,7 @@ body {
 
   padding: 10px;
   border: 2px solid gray;
-  margin-right: 15vw;
+  margin-right: 9vw;
 }
 
 #otherUserMessageText {
