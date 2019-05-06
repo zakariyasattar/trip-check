@@ -1,34 +1,34 @@
-// // Google Sign-In
-// function onSignIn(googleUser) {
-//   window.location = "assets/html/teacher.html";
-//
-//   var profile = googleUser.getBasicProfile();
-//   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-// }
-//
-// function signOut() {
-//   var auth2 = gapi.auth2.getAuthInstance();
-//   auth2.signOut().then(function () {
-//     window.location = "../../index.html";
-//   });
-// }
-//
-// gapi.load('auth2', initSigninV2);
-//
-// function initSigninV2() {
-//     gapi.auth2.init({
-//         client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-//     }).then(function (authInstance) {
-//         alert("init");
-//     });
-// }
-//
-// if(localStorage.getItem('userInfo') == null) {
-//   document.getElementById('body').style.display = "none";
-//   alert("NOT AUTHORIZED");
-// }
+// Google Sign-In
+function onSignIn(googleUser) {
+  window.location = "assets/html/teacher.html";
 
-var userName = "Zak";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
+  var profile = googleUser.getBasicProfile();
+  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+}
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    window.location = "../../index.html";
+  });
+}
+
+gapi.load('auth2', initSigninV2);
+
+function initSigninV2() {
+    gapi.auth2.init({
+        client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
+    }).then(function (authInstance) {
+        alert("init");
+    });
+}
+
+if(localStorage.getItem('userInfo') == null) {
+  document.getElementById('body').style.display = "none";
+  alert("NOT AUTHORIZED");
+}
+
+var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -59,7 +59,7 @@ config: {
 });
 
 // join room with Student Services rep
-room = user.join("Sohaib");
+room = user.join(userName);
 
 
 // room.here().then((users) => {
