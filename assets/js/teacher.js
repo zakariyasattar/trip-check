@@ -347,10 +347,11 @@ function reject(name) {
 function clearAllBoxes() {
   var boxes = document.getElementsByClassName("messageBox");
   var timeStamps = document.getElementsByClassName("messageInfo");
-
-  for(var i = 0; i < boxes.length; i++) {
-    boxes[i].style.display = "none";
-    timeStamps[i].style.display = "none";
+  
+  while(boxes.length > 0) {
+    var elem = document.getElementById("currUserMessageBox");
+    elem.remove();
+    $('br').remove();
   }
 }
 
