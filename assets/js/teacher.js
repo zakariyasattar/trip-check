@@ -1,30 +1,30 @@
-// Google Sign-In
-function onSignIn(googleUser) {
-  window.location = "assets/html/teacher.html";
+// // Google Sign-In
+// function onSignIn(googleUser) {
+//   window.location = "assets/html/teacher.html";
+//
+//   var profile = googleUser.getBasicProfile();
+//   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+// }
+//
+// function signOut() {
+//   var auth2 = gapi.auth2.getAuthInstance();
+//   auth2.signOut().then(function () {
+//     window.location = "../../index.html";
+//   });
+// }
+//
+// function onLoad() {
+//   gapi.load('auth2', function() {
+//     gapi.auth2.init();
+//   });
+// }
+//
+// if(localStorage.getItem('userInfo') == null) {
+//   document.getElementById('body').style.display = "none";
+//   alert("NOT AUTHORIZED");
+// }
 
-  var profile = googleUser.getBasicProfile();
-  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-}
-
-function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    window.location = "../../index.html";
-  });
-}
-
-function onLoad() {
-  gapi.load('auth2', function() {
-    gapi.auth2.init();
-  });
-}
-
-if(localStorage.getItem('userInfo') == null) {
-  document.getElementById('body').style.display = "none";
-  alert("NOT AUTHORIZED");
-}
-
-var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Zak"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -55,7 +55,7 @@ config: {
 });
 
 // join room with Student Services rep
-room = user.join(userName);
+room = user.join("Sohaib");
 
 
 // room.here().then((users) => {
@@ -226,8 +226,11 @@ function createSendBox(name) {
   if(splitString[1] == "false") {
     statusCircle.style.color = "#f2e341";
   }
-  else {
+  else if(splitString[1] == "true"){
     statusCircle.style.color = "#4bd859";
+  }
+  else {
+    statusCircle.style.color = "red";
   }
 
   var useTimes = document.createElement('a');
@@ -321,7 +324,6 @@ function accept(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(name == childSnapshot.val().split(";")[0]) {
-        console.log(childSnapshot.key);
         firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";true;" + childSnapshot.val().split(";")[2]);
       }
 	  });
@@ -333,7 +335,7 @@ function reject(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val().substring(0, childSnapshot.val().indexOf(';')) == name) {
-        firebase.database().ref('studentsOut').child(childSnapshot.key).remove();
+        firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";red;" + childSnapshot.val().split(";")[2]);
       }
 	  });
 	});
@@ -342,7 +344,6 @@ function reject(name) {
 
 function clearAllBoxes() {
   var boxes = document.getElementsByClassName("messageBox");
-
   var timeStamps = document.getElementsByClassName("messageInfo");
 
   while(boxes.length > 0) {
