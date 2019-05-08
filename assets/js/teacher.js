@@ -24,7 +24,7 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-var userName = "Zak"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "D"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -292,14 +292,14 @@ function createSendBox(name) {
     var accept = document.createElement('a');
     var reject = document.createElement('a');
 
-    accept.className = "fas fa-check";
+    accept.innerHTML = "Arrived";
     accept.href = "javascript:accept(\"" + splitString[0] + "\")";
 
     accept.style.marginRight = "40px";
     accept.style.color = "green";
     accept.style.fontSize = "20px";
 
-    reject.className = "fas fa-times";
+    reject.innerHTML = "Didn't Arrive";
     reject.href = "javascript:reject(\"" + splitString[0] + "\")";
 
     reject.style.color = "red";
@@ -308,8 +308,10 @@ function createSendBox(name) {
     status.appendChild(accept);
     status.appendChild(reject);
 
+    status.appendChild(useTimes);
+
     status.style.float = "right";
-    status.style.paddingRight = "90px";
+    status.style.paddingRight = "20px";
   }
 
   studentBox.appendChild(span);
