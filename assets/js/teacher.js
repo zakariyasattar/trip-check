@@ -28,7 +28,7 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-var userName = "Zak";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Kevin";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -346,20 +346,22 @@ function reject(name) {
 
 function clearAllBoxes() {
   var boxes = document.getElementsByClassName("messageBox");
-<<<<<<< HEAD
   var timeStamps = document.getElementsByClassName("messageInfo");
-  
+
   while(boxes.length > 0) {
     var elem = document.getElementById("currUserMessageBox");
+    if(elem == null ) {
+      while(boxes.length > 0){
+      var elem2 = document.getElementById("otherUserMessageBox");
+      elem2.remove();
+      $('br').remove();
+    }
+    }
     elem.remove();
     $('br').remove();
-=======
-  var dm = document.getElementById('dm');
 
-  for(var i = 0; i < boxes.length; i++) {
-    boxes[i].dm.removeChild(boxes[i]);
->>>>>>> 2310bb4b631fd6f1baf11d3c054770ea31a032d2
   }
+
 }
 
 function myFunction(x) {
