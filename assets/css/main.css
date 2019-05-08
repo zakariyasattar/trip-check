@@ -23,10 +23,10 @@ body {
 
 #signOut {
   color: white;
-  float: left;
+  float: right;
 
   position:absolute;
-  top:45px;
+  top:50px;
   left:20px;
   display: inline-block;
 }
@@ -178,27 +178,6 @@ body {
   overflow: auto;
 }
 
-.outer {
-  display: table;
-  position: absolute;
-  right: 18vw;
-  bottom: 10vh;
-
-  height: 100%;
-  width: 100%;
-}
-
-.middle {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100vw;
-}
-
-.inner {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70vw;
-}
 
 @media only screen and (max-width: 600px) {
   body {
@@ -250,34 +229,25 @@ body {
     width: 90vw;
     right: 15px;
   }
-  #introText{
-    content: "Hello";
-    position: relative;
-    right: 120vw;
-  }
+
   #studentName {
     position: relative;
     right: 59vw;
     top: -0vh;
-
   }
+  #studentSelectBox {
+    top: 300px;
+  }
+
   #submit {
     position: relative;
     left: -64vw;
-  }
-
-  .outer {
-    position: absolute;
-    left: 75vw;
-    bottom: 75vw;
-    width: 70vw;
   }
 
   #status {
     width: 90vw;
     position: absolute;
     left: 5vw;
-    top: 30vh;
   }
 }
 

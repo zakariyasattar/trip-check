@@ -13,14 +13,10 @@
 //   });
 // }
 //
-// gapi.load('auth2', initSigninV2);
-//
-// function initSigninV2() {
-//     gapi.auth2.init({
-//         client_id: '884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com'
-//     }).then(function (authInstance) {
-//         alert("init");
-//     });
+// function onLoad() {
+//   gapi.load('auth2', function() {
+//     gapi.auth2.init();
+//   });
 // }
 //
 // if(localStorage.getItem('userInfo') == null) {
@@ -28,7 +24,11 @@
 //   alert("NOT AUTHORIZED");
 // }
 
+<<<<<<< HEAD
 var userName = "Kevin";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
+=======
+var userName = "D"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
+>>>>>>> 128123f304d6244e87fab4179677cb8642aa4b76
 
 var url = document.URL;
 var parts = url.split("/");
@@ -230,8 +230,11 @@ function createSendBox(name) {
   if(splitString[1] == "false") {
     statusCircle.style.color = "#f2e341";
   }
-  else {
+  else if(splitString[1] == "true"){
     statusCircle.style.color = "#4bd859";
+  }
+  else {
+    statusCircle.style.color = "red";
   }
 
   var useTimes = document.createElement('a');
@@ -293,14 +296,14 @@ function createSendBox(name) {
     var accept = document.createElement('a');
     var reject = document.createElement('a');
 
-    accept.className = "fas fa-check";
+    accept.innerHTML = "Arrived";
     accept.href = "javascript:accept(\"" + splitString[0] + "\")";
 
     accept.style.marginRight = "40px";
     accept.style.color = "green";
     accept.style.fontSize = "20px";
 
-    reject.className = "fas fa-times";
+    reject.innerHTML = "Didn't Arrive";
     reject.href = "javascript:reject(\"" + splitString[0] + "\")";
 
     reject.style.color = "red";
@@ -309,8 +312,10 @@ function createSendBox(name) {
     status.appendChild(accept);
     status.appendChild(reject);
 
+    status.appendChild(useTimes);
+
     status.style.float = "right";
-    status.style.paddingRight = "90px";
+    status.style.paddingRight = "20px";
   }
 
   studentBox.appendChild(span);
@@ -325,7 +330,6 @@ function accept(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(name == childSnapshot.val().split(";")[0]) {
-        console.log(childSnapshot.key);
         firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";true;" + childSnapshot.val().split(";")[2]);
       }
 	  });
@@ -337,7 +341,7 @@ function reject(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val().substring(0, childSnapshot.val().indexOf(';')) == name) {
-        firebase.database().ref('studentsOut').child(childSnapshot.key).remove();
+        firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";red;" + childSnapshot.val().split(";")[2]);
       }
 	  });
 	});
@@ -359,7 +363,15 @@ function clearAllBoxes() {
     }
     elem.remove();
     $('br').remove();
+<<<<<<< HEAD
 
+=======
+    var dm = document.getElementById('dm');
+
+    for(var i = 0; i < boxes.length; i++) {
+      boxes[i].dm.removeChild(boxes[i]);
+    }
+>>>>>>> 128123f304d6244e87fab4179677cb8642aa4b76
   }
 
 }
