@@ -24,11 +24,7 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-<<<<<<< HEAD
-var userName = "Kevin";//(JSON.parse(localStorage.getItem("userInfo"))[1]);
-=======
 var userName = "D"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
->>>>>>> 128123f304d6244e87fab4179677cb8642aa4b76
 
 var url = document.URL;
 var parts = url.split("/");
@@ -86,7 +82,6 @@ function sendMessage() {
   var boxVal = document.getElementById('dmBox').value;
 
   if(boxVal != "") {
-
     room.message({message: boxVal + ";" + moment().format("hh:mm:ss A")});
     $('#dmBox').val("");
   }
@@ -105,13 +100,26 @@ room.on('message', (uuid, data) => {
 // send automated message down to Student Services sending student down based on text box
 function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
+  var eta = document.getElementById('ETA').value;
 
-  if(studentName != "") {
-    room.message({message: "Hey, just sent down " + studentName + ";" + moment().format("hh:mm:ss A")});
+  if(!isNaN(eta)  && studentName != "") {
+    swal("Good job!", "You sent down " + studentName + ". Look for an automated message!", "success");
+    if(studentName.indexOf(";") != -1){
+      studentName = studentName.replace(";", "");
+    }
+
+    room.message({message: "Hey, just sent down " + studentName + ". Should be down within " + eta + " minutes;" + moment().format("hh:mm:ss A")});
     firebase.database().ref('studentsOut').push(studentName + ";false;" + userName);
+
+    $('#studentName').val("");
+    $('#ETA').val("");
+    refreshBoxes();
   }
-  $('#studentName').val("");
-  refreshBoxes();
+  else {
+    swal("error!", "Invalid Entry Into Text Box", "error");
+    $('#studentName').val("");
+    $('#ETA').val("");
+  }
 }
 
 // create message div for current user
@@ -363,15 +371,12 @@ function clearAllBoxes() {
     }
     elem.remove();
     $('br').remove();
-<<<<<<< HEAD
 
-=======
     var dm = document.getElementById('dm');
 
     for(var i = 0; i < boxes.length; i++) {
       boxes[i].dm.removeChild(boxes[i]);
     }
->>>>>>> 128123f304d6244e87fab4179677cb8642aa4b76
   }
 
 }

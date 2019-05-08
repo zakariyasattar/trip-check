@@ -33,7 +33,6 @@ body {
 
 #dmBox {
   position: relative;
-
   width: 25vw;
   height: 5vh;
 
@@ -42,8 +41,8 @@ body {
 
   padding-left: 10px;
   padding-right: 10px;
+  margin-top: 1.5vh;
   overflow: none;
-
 }
 
 #currUserMessageBox {
@@ -189,6 +188,7 @@ body {
     top: 70vh;
     position: relative;
     border: none;
+    padding-bottom: 66px;
   }
 
   #currUserMessageBox {
@@ -205,7 +205,7 @@ body {
 
   #dmBottom {
     width: 100vw;
-    top: 178vh;
+    top: 185vh;
     left: -1vw;
     position: absolute;
   }
@@ -236,7 +236,7 @@ body {
     top: -0vh;
   }
   #studentSelectBox {
-    top: 300px;
+    bottom: 600px;
   }
 
   #submit {
