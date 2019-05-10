@@ -24,7 +24,7 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-var userName = "D"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Zak"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -56,12 +56,6 @@ config: {
 
 // join room with Student Services rep
 room = user.join("Sohaib");
-
-
-// room.here().then((users) => {
-//   var arr = Array.prototype.slice.call( users );
-//   console.log(arr);
-// });
 
 // based on hisory of the current chat room, populate data boxes with messages
 room.history().then((history) => {
@@ -362,20 +356,22 @@ function clearAllBoxes() {
 
   while(boxes.length > 0) {
     var elem = document.getElementById("currUserMessageBox");
-    if(elem == null ) {
+    if(elem == null) {
       while(boxes.length > 0){
       var elem2 = document.getElementById("otherUserMessageBox");
       elem2.remove();
       $('br').remove();
+      }
     }
+    else {
+      elem.remove();
+      $('br').remove();
     }
-    elem.remove();
-    $('br').remove();
 
     var dm = document.getElementById('dm');
 
     for(var i = 0; i < boxes.length; i++) {
-      boxes[i].dm.removeChild(boxes[i]);
+      dm.removeChild(boxes[i]);
     }
   }
 
@@ -392,7 +388,7 @@ function myFunction(x) {
 
 function removeEntry(nameToRemove) {
   nameToRemove = nameToRemove.substring(0, nameToRemove.indexOf(';'));
-
+  console.log(nameToRemove);
   var boxes = document.getElementById('status').getElementsByClassName('studentBox');
   var finalString = "";
 
