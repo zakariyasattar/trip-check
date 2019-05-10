@@ -57,12 +57,6 @@ config: {
 // join room with Student Services rep
 room = user.join(userName);
 
-
-// room.here().then((users) => {
-//   var arr = Array.prototype.slice.call( users );
-//   console.log(arr);
-// });
-
 // based on hisory of the current chat room, populate data boxes with messages
 room.history().then((history) => {
   for(var h = history.length - 1; h >= 0; h--) {
@@ -143,7 +137,6 @@ function createBoxForCurrUser(data, currentSessionCall, timeStamp) {
     }
     else{
       messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-      console.log(messageText.innerHTML);
     }
     info.innerHTML = moment().format("hh:mm:ss A");
   }
@@ -181,7 +174,6 @@ function createBoxForOtherUser(data, currentSessionCall, timeStamp) {
     }
     else{
       messageText.innerHTML = data.message.substring(0, data.message.indexOf(";"));
-      console.log(messageText.innerHTML);
     }
     info.innerHTML = moment().format("hh:mm:ss A");
   }
@@ -371,10 +363,11 @@ function clearAllBoxes() {
       elem2.remove();
       $('br').remove();
     }
-    }
+  }
+  else{
     elem.remove();
     $('br').remove();
-
+  }
     var dm = document.getElementById('dm');
 
     for(var i = 0; i < boxes.length; i++) {
