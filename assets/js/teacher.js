@@ -24,7 +24,7 @@
 //   alert("NOT AUTHORIZED");
 // }
 
-var userName = "Zak"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
+var userName = "Sohaib"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -55,7 +55,13 @@ config: {
 });
 
 // join room with Student Services rep
-room = user.join("Sohaib");
+room = user.join(userName);
+
+
+// room.here().then((users) => {
+//   var arr = Array.prototype.slice.call( users );
+//   console.log(arr);
+// });
 
 // based on hisory of the current chat room, populate data boxes with messages
 room.history().then((history) => {
@@ -97,7 +103,7 @@ function sendChildDown() {
   var eta = document.getElementById('ETA').value;
 
   if(!isNaN(eta)  && studentName != "") {
-    swal("Good job!", "You sent down " + studentName + ". Look for an automated message!", "success");
+    swal("Done!", "You sent down " + studentName + ". Look for an automated message!", "success");
     if(studentName.indexOf(";") != -1){
       studentName = studentName.replace(";", "");
     }
@@ -114,6 +120,7 @@ function sendChildDown() {
     $('#studentName').val("");
     $('#ETA').val("");
   }
+
 }
 
 // create message div for current user
@@ -332,6 +339,7 @@ function accept(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(name == childSnapshot.val().split(";")[0]) {
+        room.message({message: name + " has arrived " + ";" + moment().format("hh:mm:ss A")});
         firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";true;" + childSnapshot.val().split(";")[2]);
       }
 	  });
@@ -343,6 +351,7 @@ function reject(name) {
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val().substring(0, childSnapshot.val().indexOf(';')) == name) {
+        room.message({message: name + " has not arrived" + ";" + moment().format("hh:mm:ss A")});
         firebase.database().ref("studentsOut/" + childSnapshot.key).set(name + ";red;" + childSnapshot.val().split(";")[2]);
       }
 	  });
@@ -356,22 +365,20 @@ function clearAllBoxes() {
 
   while(boxes.length > 0) {
     var elem = document.getElementById("currUserMessageBox");
-    if(elem == null) {
+    if(elem == null ) {
       while(boxes.length > 0){
       var elem2 = document.getElementById("otherUserMessageBox");
       elem2.remove();
       $('br').remove();
-      }
     }
-    else {
-      elem.remove();
-      $('br').remove();
     }
+    elem.remove();
+    $('br').remove();
 
     var dm = document.getElementById('dm');
 
     for(var i = 0; i < boxes.length; i++) {
-      dm.removeChild(boxes[i]);
+      boxes[i].dm.removeChild(boxes[i]);
     }
   }
 
@@ -388,7 +395,7 @@ function myFunction(x) {
 
 function removeEntry(nameToRemove) {
   nameToRemove = nameToRemove.substring(0, nameToRemove.indexOf(';'));
-  console.log(nameToRemove);
+
   var boxes = document.getElementById('status').getElementsByClassName('studentBox');
   var finalString = "";
 
