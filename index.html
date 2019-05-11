@@ -58,10 +58,8 @@
     <a id="signOutA" style="display: none" href="#" onclick="signOut();">Sign out</a>
 
     <script>
-    if(document.URL.indexOf("?") == -1) {
-      window.location.href = window.location.href + "?noRedirect";
-    }
-    // Google Sign-In
+    signOut();
+    // run code if signing in as Teacher
     function onSignInTeacher(googleUser) {
       if(document.URL.indexOf("?") == -1 && document.URL.substring(document.URL.indexOf('?') + 1) != "noRedirect"){
         window.location = "assets/html/teacher.html";
@@ -73,9 +71,9 @@
         window.location.href = document.URL.substring(0, document.URL.indexOf("?"));
         signOut();
       }
-
     }
 
+    // run code if signing in as Student-Services
     function onSignInSS(googleUser) {
       if(document.URL.indexOf("?") == -1 && document.URL.substring(document.URL.indexOf('?') + 1) != "noRedirect"){
         window.location = "assets/html/studentServices.html";
@@ -87,9 +85,9 @@
         window.location.href = document.URL.substring(0, document.URL.indexOf("?"));
         signOut();
       }
-
     }
 
+    // sign out code
     function signOut() {
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function () {
