@@ -15,15 +15,21 @@
     <meta name="google-signin-client_id" content="884586453075-8l25ckv1irs78u1l51k6kqb6pc4lulme.apps.googleusercontent.com">
 	</head>
 
+  <style>
+    body {
+      background: linear-gradient(to left, #9b6dff, #a6c1ed);
+    }
+  </style>
+
 	<body>
 
-    <span class="decorated"><span >Are you a teacher?</span></span>
+    <center><span>Are you a teacher?</span></center>
+ 	  <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInTeacher"></div></center>
 
- 	  <center><button class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInTeacher"></button></center>
+    <br/>
 
-     <span class="decorated"><span>Or Student-Services?</span></span>
-
-     <center><button class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInSS"></button></center>
+     <center><span>Or Student-Services?</span></center>
+     <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInSS"></div></center>
 
 
     <a id="signOutA" style="display: none" href="#" onclick="signOut();">Sign out</a>
