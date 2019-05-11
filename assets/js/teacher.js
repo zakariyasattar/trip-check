@@ -20,7 +20,10 @@ function clickSignOut() {
     document.getElementById('signOutA').click();
   }
   else {
-    alert("hello");
+    setTimeout(function() {
+      alert("page loaded");
+      document.getElementById('signOutA').click();
+    }, 1000);
   }
 }
 
