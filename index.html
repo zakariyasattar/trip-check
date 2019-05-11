@@ -18,20 +18,45 @@
   <style>
     body {
       background: linear-gradient(to left, #9b6dff, #a6c1ed);
-      font-family: Karla;
+      font-family: Muli;
+      color: white;
+    }
+
+    .outer {
+      display: table;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .middle {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .inner {
+      margin-left: auto;
+      margin-right: auto;
+      width: 400px;
+      /*whatever width you want*/
     }
   </style>
 
 	<body>
 
-    <center><span>Are you a teacher?</span></center>
- 	  <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInTeacher"></div></center>
-
-    <br/>
-
-     <center><span>Or Student-Services?</span></center>
-     <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInSS"></div></center>
-
+    <div class="outer">
+      <div class="middle">
+        <div class="inner">
+          <center><span>Are you a teacher?</span></center>
+          <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInTeacher"></div></center>
+          <br/>
+          <center><span>Or Student-Services?</span></center>
+          <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInSS"></div></center>
+      </div>
+    </div>
+  </div>
 
     <a id="signOutA" style="display: none" href="#" onclick="signOut();">Sign out</a>
 
