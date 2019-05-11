@@ -6,18 +6,31 @@ if(localStorage.getItem('userInfo') == null) {
 
 var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
 
+// get current file name
 var url = document.URL;
 var parts = url.split("/");
 var file = parts[parts.length - 1];
 
+// remove all hashtags from url
 if(file.indexOf("#") != -1) {
   file = file.substring(0, file.indexOf("#"));
 }
+
 
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
   snapshot.forEach(function(childSnapshot) {
     refreshBoxes();
+  });
+});
+
+// check if should reload page
+firebase.database().ref('shouldReload').on('value', function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    if(childSnapshot.val().split(";")[1] == 'true' && file != childSnapshot.val().split(";")[0]) {
+      firebase.database().ref('shouldReload').remove();
+      window.location.href = window.location.href;
+    }
   });
 });
 
@@ -35,7 +48,7 @@ config: {
 });
 
 // join room with Student Services rep
-room = user.join(userName);
+var room = user.join(userName);
 
 // based on hisory of the current chat room, populate data boxes with messages
 room.history().then((history) => {
@@ -76,7 +89,7 @@ function sendChildDown() {
   var studentName = document.getElementById('studentName').value;
   var eta = document.getElementById('ETA').value;
 
-  if(!isNaN(eta)  && studentName != "") {
+  if(!isNaN(eta) && studentName != "" && eta != "") {
     swal("Done!", "You sent down " + studentName + ". Look for an automated message!", "success");
     if(studentName.indexOf(";") != -1){
       studentName = studentName.replace(";", "");
@@ -92,7 +105,6 @@ function sendChildDown() {
   else {
     swal("error!", "Invalid Entry Into Text Box", "error");
     $('#studentName').val("");
-    $('#ETA').val("");
   }
 
 }
@@ -193,6 +205,8 @@ function refreshBoxes() {
       createSendBox(childSnapshot.val());
 	   });
 	});
+
+
 }
 
 //create div box for students out
@@ -367,17 +381,26 @@ function myFunction(x) {
 }
 
 function removeEntry(nameToRemove) {
+  console.log("called");
   nameToRemove = nameToRemove.substring(0, nameToRemove.indexOf(';'));
 
   var boxes = document.getElementById('status').getElementsByClassName('studentBox');
   var finalString = "";
 
-  for(var i = 0; i < boxes.length; i++) {
-    var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
-    if(name == nameToRemove) {
-      boxes[i].style.display = "none";
-      break;
+  if(boxes.length != 1){
+    alert("notlastbox");
+    for(var i = 0; i < boxes.length; i++) {
+      var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
+      if(name == nameToRemove) {
+        boxes[i].style.display = "none";
+        break;
+      }
     }
+  }
+  else {
+    boxes[0].style.display = "none";
+    setTimeout(function(){  window.location.href = window.location.href; }, 100);
+    firebase.database().ref('shouldReload').push(file + ";true");
   }
 
   firebase.database().ref('studentsOut').once('value', function(snapshot) {
