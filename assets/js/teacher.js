@@ -10,12 +10,6 @@ function clickSignOut() {
   window.location = "../../index.html";
 }
 
-function onLoad() {
-  gapi.load('auth2', function() {
-    gapi.auth2.init();
-  });
-}
-
 if(localStorage.getItem('userInfo') == null) {
   document.getElementById('body').style.display = "none";
   alert("NOT AUTHORIZED");
