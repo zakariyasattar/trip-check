@@ -1,11 +1,3 @@
-// Google Sign-In
-function onSignIn(googleUser) {
-  window.location = "assets/html/teacher.html";
-
-  var profile = googleUser.getBasicProfile();
-  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-}
-
 function clickSignOut() {
   window.location = "../../index.html";
 }
