@@ -32,6 +32,10 @@
         signOut();
       }
 
+      var profile = googleUser.getBasicProfile();
+      localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+    }
+
     function onSignInSS(googleUser) {
       alert("ss");
       if(document.URL.indexOf("?") == -1 && document.URL.substring(document.URL.indexOf('?') + 1) != "noRedirect"){
