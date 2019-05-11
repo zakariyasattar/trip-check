@@ -22,7 +22,7 @@
     signOut();
     // Google Sign-In
     function onSignIn(googleUser) {
-      if(document.URL.indexOf("?") != -1 && document.URL.substring(document.URL.indexOf('?') + 1) != "noRedirect"){
+      if(document.URL.indexOf("?") == -1 && document.URL.substring(document.URL.indexOf('?') + 1) != "noRedirect"){
         window.location = "assets/html/teacher.html";
       }
       else {
