@@ -26,6 +26,7 @@
         window.location = "assets/html/teacher.html";
       }
       else {
+        document.URL = document.URL.substring(0, document.URL.indexOf("?"));
         signOut();
       }
 
