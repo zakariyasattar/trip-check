@@ -1,5 +1,6 @@
 function clickSignOut() {
   window.location = "../../index.html";
+  document.getElementById('signOutA').click();
 }
 
 if(localStorage.getItem('userInfo') == null) {
