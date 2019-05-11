@@ -1,30 +1,30 @@
-// // Google Sign-In
-// function onSignIn(googleUser) {
-//   window.location = "assets/html/teacher.html";
-//
-//   var profile = googleUser.getBasicProfile();
-//   localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
-// }
-//
-// function signOut() {
-//   var auth2 = gapi.auth2.getAuthInstance();
-//   auth2.signOut().then(function () {
-//     window.location = "../../index.html";
-//   });
-// }
-//
-// function onLoad() {
-//   gapi.load('auth2', function() {
-//     gapi.auth2.init();
-//   });
-// }
-//
-// if(localStorage.getItem('userInfo') == null) {
-//   document.getElementById('body').style.display = "none";
-//   alert("NOT AUTHORIZED");
-// }
+// Google Sign-In
+function onSignIn(googleUser) {
+  window.location = "assets/html/teacher.html";
 
-var userName = "Sohaib"; //(JSON.parse(localStorage.getItem("userInfo"))[1]);
+  var profile = googleUser.getBasicProfile();
+  localStorage.setItem("userInfo", JSON.stringify([profile.getId(), profile.getName(), profile.getImageUrl(), profile.getEmail()]));
+}
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    window.location = "../../index.html";
+  });
+}
+
+function onLoad() {
+  gapi.load('auth2', function() {
+    gapi.auth2.init();
+  });
+}
+
+if(localStorage.getItem('userInfo') == null) {
+  document.getElementById('body').style.display = "none";
+  alert("NOT AUTHORIZED");
+}
+
+var userName = (JSON.parse(localStorage.getItem("userInfo"))[1]);
 
 var url = document.URL;
 var parts = url.split("/");
@@ -371,7 +371,7 @@ function clearAllBoxes() {
     var dm = document.getElementById('dm');
 
     for(var i = 0; i < boxes.length; i++) {
-      boxes[i].dm.removeChild(boxes[i]);
+      dm.removeChild(boxes[i]);
     }
   }
 
