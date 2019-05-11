@@ -15,7 +15,7 @@ if(file.indexOf("#") != -1) {
 }
 
 function clickSignOut() {
-  window.location = "../../index.html";
+  window.location = "../../index.html?noRedirect";
   setTimeout(function() {
     if(file == "index.html") {
       document.getElementById('signOutA').click();
