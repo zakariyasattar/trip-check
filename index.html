@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-    <div id="my-signin2"></div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
     <a id="signOutA" style="display: none" href="#" onclick="signOut();">Sign out</a>
 
@@ -36,7 +36,7 @@
     }
 
     function renderButton() {
-      gapi.signin2.render('my-signin2', {
+      gapi.signin2.render('g-signin2', {
         'scope': 'profile email',
         'width': 240,
         'height': 50,
