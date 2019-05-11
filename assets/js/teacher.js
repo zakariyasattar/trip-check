@@ -14,10 +14,6 @@ if(file.indexOf("#") != -1) {
   file = file.substring(0, file.indexOf("#"));
 }
 
-function clickSignOut() {
-  window.location = "../../index.html?noRedirect";
-}
-
 // Everytime there is a db update, refresh
 firebase.database().ref('studentsOut').on('value', function(snapshot) {
   snapshot.forEach(function(childSnapshot) {
