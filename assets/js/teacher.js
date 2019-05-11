@@ -1,8 +1,4 @@
-function clickSignOut() {
-  window.location = "../../index.html";
-  document.getElementById('signOutA').click();
-}
-
+// check if user is signed in
 if(localStorage.getItem('userInfo') == null) {
   document.getElementById('body').style.display = "none";
   alert("NOT AUTHORIZED");
@@ -16,6 +12,16 @@ var file = parts[parts.length - 1];
 
 if(file.indexOf("#") != -1) {
   file = file.substring(0, file.indexOf("#"));
+}
+
+function clickSignOut() {
+  window.location = "../../index.html";
+  if(file == "index.html") {
+    document.getElementById('signOutA').click();
+  }
+  else {
+    alert("hello");
+  }
 }
 
 // Everytime there is a db update, refresh
