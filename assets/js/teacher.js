@@ -388,7 +388,6 @@ function removeEntry(nameToRemove) {
   var finalString = "";
 
   if(boxes.length != 1){
-    alert("notlastbox");
     for(var i = 0; i < boxes.length; i++) {
       var name = $(boxes[i]).text().substring(0, $(boxes[i]).text().indexOf("Status"));
       if(name == nameToRemove) {
