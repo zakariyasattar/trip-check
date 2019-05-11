@@ -58,7 +58,9 @@
     <a id="signOutA" style="display: none" href="#" onclick="signOut();">Sign out</a>
 
     <script>
-    window.location.href = window.location.href + "?noRedirect";
+    if(document.URL.indexOf("?") == -1) {
+      window.location.href = window.location.href + "?noRedirect";
+    }
     // Google Sign-In
     function onSignInTeacher(googleUser) {
       if(document.URL.indexOf("?") == -1 && document.URL.substring(document.URL.indexOf('?') + 1) != "noRedirect"){
