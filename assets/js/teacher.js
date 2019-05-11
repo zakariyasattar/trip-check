@@ -16,11 +16,6 @@ if(file.indexOf("#") != -1) {
 
 function clickSignOut() {
   window.location = "../../index.html?noRedirect";
-  setTimeout(function() {
-    if(file == "index.html") {
-      document.getElementById('signOutA').click();
-    }
-  }, 1000);
 }
 
 // Everytime there is a db update, refresh
