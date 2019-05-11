@@ -16,16 +16,14 @@
 	</head>
 
   <style>
-    body {
-      background: linear-gradient(to left, #9b6dff, #a6c1ed);
-      font-family: Muli;
-      color: white;
-    }
 
     .outer {
       background: linear-gradient(to left, #9b6dff, #a6c1ed);
       font-family: Muli;
       color: white;
+
+      font-size: 20px;
+
       display: table;
       position: absolute;
       top: 0;
@@ -48,12 +46,11 @@
 	<body>
     <div class="outer">
       <div class="middle">
+        <center style="position: relative; bottom: 30vh"><h1>Welcome To Trip Check!</h1>
+        <p>Just sign in below to begin</p></center>
         <div class="inner">
-          <center><span>Are you a teacher?</span></center>
-          <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInTeacher"></div></center>
-          <br/>
-          <center><span>Or Student-Services?</span></center>
-          <center><div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInSS"></div></center>
+          <center><span>Login As A Teacher: <div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInTeacher"></div></span>
+          <span>Login as Student-Services: <div class="g-signin2" data-width="170" data-height="30" data-onsuccess="onSignInSS"></div></center></span>
       </div>
     </div>
   </div>
