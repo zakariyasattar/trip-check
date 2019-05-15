@@ -255,7 +255,12 @@ function createSendBox(name) {
         room.history().then((history) => {
           for(var h = history.length - 1; h >= 0; h--) {
             var data = history[h].data.message;
-            createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+            if(history[h].uuid == userName) {
+              createBoxForCurrUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+            }
+            else {
+              createBoxForOtherUser(data.substring(0, data.indexOf(';')), false, data.substring(data.indexOf(';') + 1));
+            }
           }
         });
       };
