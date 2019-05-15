@@ -99,7 +99,6 @@ function sendChildDown() {
     firebase.database().ref('studentsOut').push(studentName + ";false;" + userName);
 
     $('#studentName').val("");
-    $('#ETA').val("");
     refreshBoxes();
   }
   else {
@@ -202,7 +201,9 @@ function refreshBoxes() {
 
 	firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
-      createSendBox(childSnapshot.val());
+      if(childSnapshot.val().split(';')[2] == userName) {
+        createSendBox(childSnapshot.val());
+      }
 	   });
 	});
 
