@@ -197,6 +197,8 @@ if(file == "teacher.html") {
 
 //create boxes based on who teachers send out
 function refreshBoxes() {
+  var statusBox = document.getElementById('status').innerHTML = "";
+
 	firebase.database().ref('studentsOut').once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val().split(';')[2] == userName) {
